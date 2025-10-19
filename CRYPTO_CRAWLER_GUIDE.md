@@ -5,7 +5,7 @@
 ### Bước 1: Cài đặt Python packages
 
 ```bash
-cd "/Users/nguyentiendang0106/Documents/20251/Big data"
+cd "..."
 pip install -r requirements.txt
 ```
 
