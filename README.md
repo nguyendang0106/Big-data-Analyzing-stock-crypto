@@ -1,4 +1,4 @@
-# Hệ Thống Thu Thập, Lưu Trữ và Phân Tích Dữ Liệu Chứng Khoán
+# Hệ Thống Thu Thập, Lưu Trữ và Phân Tích Dữ Liệu Chứng Khoán, Tiền Ảo
 
 ## Tổng Quan
 

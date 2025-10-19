@@ -1,0 +1,10 @@
+venv
+env
+.venv
+.env
+
+
+.vscode
+
+*.json
+*.csv
