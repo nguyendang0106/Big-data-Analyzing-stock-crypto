@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: historical-batch-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: historical-loader
+        
+        # 1. Tên image 
+        image: historical-batch-loader:latest
+        
+        # 2. Rất quan trọng: Bảo K8s dùng image local
+        # (Không cần tải từ Internet)
+        imagePullPolicy: IfNotPresent
+        
+        # 3. Lấy biến môi trường từ Secret đã tạo
+        envFrom:
+        - secretRef:
+            name: minio-creds
+            
+      # 4. Quan trọng cho Job:
+      # "Never" = Chạy xong (kể cả lỗi) là dừng, không tự khởi động lại
+      restartPolicy: Never
+      
+  # Đảm bảo Job sẽ tự xóa sau khi hoàn thành (ví dụ: 100 giây)
+  # Rất hữu ích để dọn dẹp
+  ttlSecondsAfterFinished: 100
