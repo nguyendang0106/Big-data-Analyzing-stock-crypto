@@ -1,0 +1,682 @@
+[2025-10-28T06:34:57.461+0000] {processor.py:161} INFO - Started process (PID=10947) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:34:57.462+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:34:57.464+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:34:57.464+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:34:57.508+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:34:57.500+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:34:57.510+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:34:57.525+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.069 seconds
+[2025-10-28T06:35:28.506+0000] {processor.py:161} INFO - Started process (PID=11006) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:35:28.507+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:35:28.509+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:35:28.509+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:35:28.542+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:35:28.535+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:35:28.544+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:35:28.561+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.060 seconds
+[2025-10-28T06:35:59.472+0000] {processor.py:161} INFO - Started process (PID=11065) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:35:59.474+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:35:59.476+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:35:59.476+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:35:59.508+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:35:59.504+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:35:59.509+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:35:59.526+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.059 seconds
+[2025-10-28T06:36:29.653+0000] {processor.py:161} INFO - Started process (PID=11124) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:36:29.654+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:36:29.656+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:36:29.656+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:36:29.685+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:36:29.679+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:36:29.686+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:36:29.706+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.058 seconds
+[2025-10-28T06:36:59.777+0000] {processor.py:161} INFO - Started process (PID=11183) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:36:59.778+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:36:59.780+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:36:59.780+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:36:59.803+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:36:59.798+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:36:59.804+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:36:59.820+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.048 seconds
+[2025-10-28T06:37:30.024+0000] {processor.py:161} INFO - Started process (PID=11242) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:37:30.025+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:37:30.027+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:37:30.027+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:37:30.056+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:37:30.051+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:37:30.057+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:37:30.071+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.051 seconds
+[2025-10-28T06:38:00.487+0000] {processor.py:161} INFO - Started process (PID=11301) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:38:00.488+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:38:00.490+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:38:00.490+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:38:00.519+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:38:00.512+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:38:00.520+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:38:00.544+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.062 seconds
+[2025-10-28T06:38:30.747+0000] {processor.py:161} INFO - Started process (PID=11360) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:38:30.748+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:38:30.751+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:38:30.750+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:38:30.792+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:38:30.783+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:38:30.793+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:38:30.811+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.069 seconds
+[2025-10-28T06:39:00.920+0000] {processor.py:161} INFO - Started process (PID=11419) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:39:00.921+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:39:00.924+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:39:00.923+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:39:00.957+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:39:00.950+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:39:00.959+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:39:00.984+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.070 seconds
+[2025-10-28T06:39:31.281+0000] {processor.py:161} INFO - Started process (PID=11478) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:39:31.282+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:39:31.286+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:39:31.285+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:39:31.320+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:39:31.313+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent', 'command_placeholder': '{{ ds }}'}
+[2025-10-28T06:39:31.321+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:39:31.345+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.069 seconds
+[2025-10-28T06:40:01.651+0000] {processor.py:161} INFO - Started process (PID=11537) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:40:01.653+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:40:01.659+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:40:01.657+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:40:01.714+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:40:01.707+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent'}
+[2025-10-28T06:40:01.716+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:40:01.738+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.098 seconds
+[2025-10-28T06:40:32.058+0000] {processor.py:161} INFO - Started process (PID=11596) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:40:32.060+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:40:32.061+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:40:32.061+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:40:32.101+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:40:32.092+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent'}
+[2025-10-28T06:40:32.102+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:40:32.121+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.068 seconds
+[2025-10-28T06:41:02.396+0000] {processor.py:161} INFO - Started process (PID=11655) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:02.397+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:41:02.399+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:41:02.399+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:02.429+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:41:02.422+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'image_pull_policy': 'IfNotPresent'}
+[2025-10-28T06:41:02.430+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:02.446+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.055 seconds
+[2025-10-28T06:41:25.233+0000] {processor.py:161} INFO - Started process (PID=11696) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:25.234+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:41:25.236+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:41:25.235+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:25.280+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:41:25.275+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'pull_policy': 'IfNotPresent'}
+[2025-10-28T06:41:25.281+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:25.299+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.072 seconds
+[2025-10-28T06:41:55.846+0000] {processor.py:161} INFO - Started process (PID=11753) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:55.847+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:41:55.849+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:41:55.849+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:55.882+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:41:55.875+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'pull_policy': 'IfNotPresent'}
+[2025-10-28T06:41:55.883+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:41:55.908+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.067 seconds
+[2025-10-28T06:42:26.030+0000] {processor.py:161} INFO - Started process (PID=11812) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:42:26.031+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:42:26.033+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:42:26.033+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:42:26.060+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:42:26.055+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'pull_policy': 'IfNotPresent'}
+[2025-10-28T06:42:26.061+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:42:26.076+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.051 seconds
+[2025-10-28T06:42:56.217+0000] {processor.py:161} INFO - Started process (PID=11872) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:42:56.218+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:42:56.220+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:42:56.220+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:42:56.248+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:42:56.242+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'pull_policy': 'IfNotPresent'}
+[2025-10-28T06:42:56.249+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:42:56.269+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.059 seconds
+[2025-10-28T06:43:26.472+0000] {processor.py:161} INFO - Started process (PID=11931) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:43:26.473+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:43:26.476+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:26.476+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:43:26.510+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:26.503+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/etl_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_dag.py", line 24, in <module>
+    run_etl_task = DockerOperator(
+                   ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/docker/operators/docker.py", line 272, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 485, in apply_defaults
+    result = func(self, **kwargs, default_args=default_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 882, in __init__
+    raise AirflowException(
+airflow.exceptions.AirflowException: Invalid arguments were passed to DockerOperator (task_id: run_daily_minio_etl). Invalid arguments were:
+**kwargs: {'pull_policy': 'IfNotPresent'}
+[2025-10-28T06:43:26.512+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:43:26.532+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.068 seconds
+[2025-10-28T06:43:33.885+0000] {processor.py:161} INFO - Started process (PID=11952) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:43:33.886+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:43:33.888+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:33.888+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:43:33.945+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:43:34.035+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:34.034+0000] {override.py:1829} INFO - Created Permission View: can delete on DAG:crypto_cold_path_etl_1am
+[2025-10-28T06:43:34.042+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:34.042+0000] {override.py:1829} INFO - Created Permission View: can edit on DAG:crypto_cold_path_etl_1am
+[2025-10-28T06:43:34.047+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:34.047+0000] {override.py:1829} INFO - Created Permission View: can read on DAG:crypto_cold_path_etl_1am
+[2025-10-28T06:43:34.048+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:34.048+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:43:34.055+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:34.055+0000] {dag.py:3118} INFO - Creating ORM DAG for crypto_cold_path_etl_1am
+[2025-10-28T06:43:34.063+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:43:34.063+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:43:34.090+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.210 seconds
+[2025-10-28T06:44:04.527+0000] {processor.py:161} INFO - Started process (PID=12010) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:44:04.528+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:44:04.530+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:44:04.529+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:44:04.552+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:44:04.567+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:44:04.567+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:44:04.583+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:44:04.583+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:44:04.599+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.078 seconds
+[2025-10-28T06:44:35.004+0000] {processor.py:161} INFO - Started process (PID=12069) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:44:35.006+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:44:35.007+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:44:35.007+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:44:35.031+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:44:35.046+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:44:35.045+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:44:35.063+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:44:35.063+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:44:35.078+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.080 seconds
+[2025-10-28T06:45:05.382+0000] {processor.py:161} INFO - Started process (PID=12128) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:45:05.383+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:45:05.385+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:45:05.385+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:45:05.412+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:45:05.436+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:45:05.436+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:45:05.460+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:45:05.460+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:45:05.482+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.106 seconds
+[2025-10-28T06:45:36.099+0000] {processor.py:161} INFO - Started process (PID=12193) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:45:36.100+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:45:36.102+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:45:36.102+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:45:36.127+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:45:36.140+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:45:36.140+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:45:36.155+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:45:36.155+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:45:36.171+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.076 seconds
+[2025-10-28T06:46:06.827+0000] {processor.py:161} INFO - Started process (PID=12252) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:46:06.828+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:46:06.830+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:46:06.830+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:46:06.857+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:46:06.872+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:46:06.872+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:46:06.888+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:46:06.888+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:46:06.910+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.088 seconds
+[2025-10-28T06:46:37.224+0000] {processor.py:161} INFO - Started process (PID=12311) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:46:37.226+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:46:37.227+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:46:37.227+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:46:37.253+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:46:37.266+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:46:37.266+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:46:37.282+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:46:37.281+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:46:37.297+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.078 seconds
+[2025-10-28T06:47:08.118+0000] {processor.py:161} INFO - Started process (PID=12370) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:47:08.119+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:47:08.121+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:47:08.121+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:47:08.147+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:47:08.166+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:47:08.166+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:47:08.184+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:47:08.184+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:47:08.203+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.090 seconds
+[2025-10-28T06:47:38.308+0000] {processor.py:161} INFO - Started process (PID=12429) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:47:38.309+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:47:38.311+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:47:38.310+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:47:38.339+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:47:38.357+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:47:38.357+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:47:38.378+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:47:38.378+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:47:38.397+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.094 seconds
+[2025-10-28T06:48:08.486+0000] {processor.py:161} INFO - Started process (PID=12488) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:48:08.487+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:48:08.489+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:48:08.488+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:48:08.530+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:48:08.543+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:48:08.543+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:48:08.559+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:48:08.559+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:48:08.583+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.102 seconds
+[2025-10-28T06:48:38.746+0000] {processor.py:161} INFO - Started process (PID=12547) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:48:38.747+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:48:38.750+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:48:38.750+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:48:38.778+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:48:38.792+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:48:38.792+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:48:38.920+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:48:38.920+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:48:38.934+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.195 seconds
+[2025-10-28T06:49:09.904+0000] {processor.py:161} INFO - Started process (PID=12606) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:49:09.905+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:49:09.907+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:49:09.907+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:49:09.944+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:49:09.961+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:49:09.960+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:49:09.979+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:49:09.979+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:49:10.008+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.110 seconds
+[2025-10-28T06:49:40.086+0000] {processor.py:161} INFO - Started process (PID=12665) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:49:40.088+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:49:40.090+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:49:40.090+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:49:40.119+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:49:40.147+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:49:40.147+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:49:40.184+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:49:40.183+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:49:40.213+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.132 seconds
+[2025-10-28T06:50:10.503+0000] {processor.py:161} INFO - Started process (PID=12724) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:50:10.504+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:50:10.506+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:50:10.506+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:50:10.533+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:50:10.658+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:50:10.658+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:50:10.671+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:50:10.671+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:50:10.685+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.188 seconds
+[2025-10-28T06:50:40.837+0000] {processor.py:161} INFO - Started process (PID=12783) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:50:40.838+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:50:40.840+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:50:40.840+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:50:40.864+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:50:40.878+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:50:40.877+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:50:40.893+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:50:40.893+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:50:40.911+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.078 seconds
+[2025-10-28T06:51:11.586+0000] {processor.py:161} INFO - Started process (PID=12843) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:51:11.589+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:51:11.592+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:51:11.591+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:51:11.625+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:51:11.650+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:51:11.650+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:51:11.677+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:51:11.676+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:51:11.705+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.127 seconds
+[2025-10-28T06:51:41.876+0000] {processor.py:161} INFO - Started process (PID=12902) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:51:41.878+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:51:41.882+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:51:41.882+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:51:41.918+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:51:41.949+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:51:41.948+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:51:41.990+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:51:41.990+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:51:42.028+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.164 seconds
+[2025-10-28T06:52:12.798+0000] {processor.py:161} INFO - Started process (PID=12961) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:52:12.800+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:52:12.803+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:52:12.803+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:52:12.838+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:52:12.862+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:52:12.861+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:52:12.884+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:52:12.883+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:52:12.905+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.115 seconds
+[2025-10-28T06:52:42.992+0000] {processor.py:161} INFO - Started process (PID=13020) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:52:42.993+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:52:42.995+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:52:42.995+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:52:43.020+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:52:43.036+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:52:43.035+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:52:43.058+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:52:43.057+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:52:43.083+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.096 seconds
+[2025-10-28T06:53:13.225+0000] {processor.py:161} INFO - Started process (PID=13081) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:53:13.226+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:53:13.229+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:53:13.228+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:53:13.258+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:53:13.276+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:53:13.276+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:53:13.298+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:53:13.297+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:53:13.320+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.101 seconds
+[2025-10-28T06:53:44.078+0000] {processor.py:161} INFO - Started process (PID=13138) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:53:44.079+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:53:44.081+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:53:44.081+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:53:44.103+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:53:44.121+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:53:44.121+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:53:44.139+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:53:44.139+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:53:44.157+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.085 seconds
+[2025-10-28T06:54:14.883+0000] {processor.py:161} INFO - Started process (PID=13197) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:54:14.884+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:54:14.887+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:54:14.887+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:54:14.914+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:54:14.932+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:54:14.932+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:54:14.952+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:54:14.952+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:54:14.971+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.096 seconds
+[2025-10-28T06:54:45.538+0000] {processor.py:161} INFO - Started process (PID=13256) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:54:45.539+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:54:45.542+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:54:45.542+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:54:45.565+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:54:45.586+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:54:45.586+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:54:45.608+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:54:45.608+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:54:45.630+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.098 seconds
+[2025-10-28T06:55:16.327+0000] {processor.py:161} INFO - Started process (PID=13315) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:55:16.328+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:55:16.331+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:55:16.331+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:55:16.359+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:55:16.379+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:55:16.379+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:55:16.402+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:55:16.402+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:55:16.425+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.106 seconds
+[2025-10-28T06:55:46.960+0000] {processor.py:161} INFO - Started process (PID=13374) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:55:46.963+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:55:46.965+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:55:46.964+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:55:46.989+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:55:47.005+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:55:47.005+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:55:47.024+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:55:47.024+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:55:47.044+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.090 seconds
+[2025-10-28T06:56:17.435+0000] {processor.py:161} INFO - Started process (PID=13433) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:56:17.436+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:56:17.438+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:56:17.438+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:56:17.465+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:56:17.489+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:56:17.489+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:56:17.513+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:56:17.513+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:56:17.537+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.107 seconds
+[2025-10-28T06:56:47.973+0000] {processor.py:161} INFO - Started process (PID=13492) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:56:47.974+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:56:47.976+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:56:47.976+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:56:48.000+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:56:48.022+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:56:48.022+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:56:48.046+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:56:48.046+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:56:48.068+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.102 seconds
+[2025-10-28T06:57:18.371+0000] {processor.py:161} INFO - Started process (PID=13551) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:57:18.373+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:57:18.375+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:57:18.375+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:57:18.397+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:57:18.417+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:57:18.417+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:57:18.437+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:57:18.437+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:57:18.457+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.091 seconds
+[2025-10-28T06:57:49.014+0000] {processor.py:161} INFO - Started process (PID=13610) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:57:49.015+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:57:49.017+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:57:49.017+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:57:49.043+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:57:49.060+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:57:49.059+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:57:49.076+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:57:49.076+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:57:49.095+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.085 seconds
+[2025-10-28T06:58:19.371+0000] {processor.py:161} INFO - Started process (PID=13669) to work on /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:58:19.372+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-10-28T06:58:19.373+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:58:19.373+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:58:19.395+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_etl_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-10-28T06:58:19.408+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:58:19.408+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-10-28T06:58:19.423+0000] {logging_mixin.py:188} INFO - [2025-10-28T06:58:19.422+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_etl_1am to 2025-10-28 01:00:00+00:00, run_after=2025-10-29 01:00:00+00:00
+[2025-10-28T06:58:19.437+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.071 seconds
