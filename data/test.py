@@ -31,7 +31,7 @@ class CryptoCrawler:
         Returns:
             DataFrame chứa thông tin các cryptocurrency
         """
-        print(f"🔄 Đang crawl top {limit} cryptocurrencies...")
+        print(f" Đang crawl top {limit} cryptocurrencies...")
         
         url = f"{self.base_url}/coins/markets"
         params = {
@@ -51,11 +51,11 @@ class CryptoCrawler:
             df = pd.DataFrame(data)
             df['timestamp'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             
-            print(f"✅ Đã crawl thành công {len(df)} cryptocurrencies")
+            print(f" Đã crawl thành công {len(df)} cryptocurrencies")
             return df
             
         except requests.exceptions.RequestException as e:
-            print(f"❌ Lỗi khi crawl dữ liệu: {e}")
+            print(f" Lỗi khi crawl dữ liệu: {e}")
             return None
     
     def get_coin_details(self, coin_id):
@@ -68,7 +68,7 @@ class CryptoCrawler:
         Returns:
             Dictionary chứa thông tin chi tiết
         """
-        print(f"🔄 Đang crawl thông tin chi tiết cho {coin_id}...")
+        print(f" Đang crawl thông tin chi tiết cho {coin_id}...")
         
         url = f"{self.base_url}/coins/{coin_id}"
         params = {
@@ -84,11 +84,11 @@ class CryptoCrawler:
             response.raise_for_status()
             data = response.json()
             
-            print(f"✅ Đã crawl thành công thông tin {coin_id}")
+            print(f" Đã crawl thành công thông tin {coin_id}")
             return data
             
         except requests.exceptions.RequestException as e:
-            print(f"❌ Lỗi khi crawl dữ liệu: {e}")
+            print(f" Lỗi khi crawl dữ liệu: {e}")
             return None
     
     def get_historical_data(self, coin_id, days=30, vs_currency='usd'):
@@ -103,7 +103,7 @@ class CryptoCrawler:
         Returns:
             DataFrame chứa dữ liệu lịch sử
         """
-        print(f"🔄 Đang crawl dữ liệu lịch sử {days} ngày cho {coin_id}...")
+        print(f" Đang crawl dữ liệu lịch sử {days} ngày cho {coin_id}...")
         
         url = f"{self.base_url}/coins/{coin_id}/market_chart"
         params = {
@@ -127,11 +127,11 @@ class CryptoCrawler:
             df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
             df['coin_id'] = coin_id
             
-            print(f"✅ Đã crawl thành công {len(df)} records lịch sử")
+            print(f" Đã crawl thành công {len(df)} records lịch sử")
             return df
             
         except requests.exceptions.RequestException as e:
-            print(f"❌ Lỗi khi crawl dữ liệu: {e}")
+            print(f" Lỗi khi crawl dữ liệu: {e}")
             return None
     
     def get_trending_coins(self):
@@ -141,7 +141,7 @@ class CryptoCrawler:
         Returns:
             List các coin đang trending
         """
-        print("🔄 Đang crawl trending coins...")
+        print(" Đang crawl trending coins...")
         
         url = f"{self.base_url}/search/trending"
         
@@ -154,11 +154,11 @@ class CryptoCrawler:
             df = pd.DataFrame([coin['item'] for coin in trending])
             df['timestamp'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             
-            print(f"✅ Đã crawl thành công {len(df)} trending coins")
+            print(f" Đã crawl thành công {len(df)} trending coins")
             return df
             
         except requests.exceptions.RequestException as e:
-            print(f"❌ Lỗi khi crawl dữ liệu: {e}")
+            print(f" Lỗi khi crawl dữ liệu: {e}")
             return None
     
     def get_global_data(self):
@@ -168,7 +168,7 @@ class CryptoCrawler:
         Returns:
             Dictionary chứa dữ liệu global
         """
-        print("🔄 Đang crawl global market data...")
+        print(" Đang crawl global market data...")
         
         url = f"{self.base_url}/global"
         
@@ -177,11 +177,11 @@ class CryptoCrawler:
             response.raise_for_status()
             data = response.json()
             
-            print("✅ Đã crawl thành công global data")
+            print(" Đã crawl thành công global data")
             return data['data']
             
         except requests.exceptions.RequestException as e:
-            print(f"❌ Lỗi khi crawl dữ liệu: {e}")
+            print(f" Lỗi khi crawl dữ liệu: {e}")
             return None
     
     def save_to_csv(self, df, filename):
@@ -189,7 +189,7 @@ class CryptoCrawler:
         if df is not None and not df.empty:
             filepath = f"crypto_data_{filename}.csv"
             df.to_csv(filepath, index=False, encoding='utf-8')
-            print(f"💾 Đã lưu dữ liệu vào {filepath}")
+            print(f" Đã lưu dữ liệu vào {filepath}")
             return filepath
         return None
     
@@ -199,7 +199,7 @@ class CryptoCrawler:
             filepath = f"crypto_data_{filename}.json"
             with open(filepath, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
-            print(f"💾 Đã lưu dữ liệu vào {filepath}")
+            print(f" Đã lưu dữ liệu vào {filepath}")
             return filepath
         return None
 
@@ -208,7 +208,7 @@ def main():
     """Hàm chính để chạy crawler"""
     
     print("=" * 60)
-    print("🚀 CRYPTOCURRENCY DATA CRAWLER")
+    print(" CRYPTOCURRENCY DATA CRAWLER")
     print("=" * 60)
     
     # Khởi tạo crawler
@@ -219,7 +219,7 @@ def main():
     os.chdir('crypto_data')
     
     # 1. Crawl top 50 cryptocurrencies
-    print("\n📊 Task 1: Crawl Top 50 Cryptocurrencies")
+    print("\n Task 1: Crawl Top 50 Cryptocurrencies")
     print("-" * 60)
     top_coins = crawler.get_top_cryptocurrencies(limit=50)
     if top_coins is not None:
@@ -230,7 +230,7 @@ def main():
     time.sleep(2)  # Delay để tránh rate limit
     
     # 2. Crawl trending coins
-    print("\n\n🔥 Task 2: Crawl Trending Coins")
+    print("\n\n Task 2: Crawl Trending Coins")
     print("-" * 60)
     trending = crawler.get_trending_coins()
     if trending is not None:
@@ -241,7 +241,7 @@ def main():
     time.sleep(2)
     
     # 3. Crawl dữ liệu lịch sử Bitcoin và Ethereum
-    print("\n\n📈 Task 3: Crawl Historical Data")
+    print("\n\n Task 3: Crawl Historical Data")
     print("-" * 60)
     
     for coin in ['bitcoin', 'ethereum']:
@@ -277,16 +277,16 @@ def main():
         print(f"All Time High: ${btc_details.get('market_data', {}).get('ath', {}).get('usd', 0):,.0f}")
     
     print("\n" + "=" * 60)
-    print("✅ HOÀN THÀNH CRAWL DỮ LIỆU!")
+    print(" HOÀN THÀNH CRAWL DỮ LIỆU!")
     print("=" * 60)
-    print(f"📁 Dữ liệu đã được lưu trong thư mục: {os.getcwd()}")
+    print(f" Dữ liệu đã được lưu trong thư mục: {os.getcwd()}")
 
 
 if __name__ == "__main__":
     # Chạy crawler
     main()
     
-    print("\n💡 Tips:")
+    print("\n Tips:")
     print("- Có thể thay đổi limit, days, coin_id theo nhu cầu")
     print("- API CoinGecko free có giới hạn ~10-50 requests/phút")
     print("- Sử dụng time.sleep() để tránh bị rate limit")
