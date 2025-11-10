@@ -1,25 +1,411 @@
-# 🚀 Hướng Dẫn Sử Dụng Cryptocurrency Crawler
+# 🚀 Hướng Dẫn Sử Dụng Cryptocurrency Data Pipeline
+
+## Integration với Apache Airflow & Big Data Stack
 
 ## 📦 Cài Đặt
 
 ### Bước 1: Cài đặt Python packages
 
 ```bash
-cd "..."
+cd "/Users/nguyentiendang0106/Documents/20251/Big data"
 pip install -r requirements.txt
 ```
 
 Hoặc cài từng package:
 
 ```bash
-pip install requests pandas numpy schedule openpyxl
+pip install requests pandas numpy schedule openpyxl apache-airflow pyspark kafka-python
 ```
 
-## 🎯 Cách Sử Dụng
+### Bước 2: Cài đặt Big Data Stack (Optional - For Production)
 
-### File 1: `test.py` - Basic Crawler
+```bash
+# Airflow
+pip install apache-airflow apache-airflow-providers-apache-spark
 
-Crawler cơ bản với CoinGecko API:
+# Kafka Python Client
+pip install kafka-python confluent-kafka
+
+# Spark
+# Download từ https://spark.apache.org/downloads.html
+```
+
+## 🎯 Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   DATA PIPELINE FLOW                         │
+└─────────────────────────────────────────────────────────────┘
+
+    Crawlers (Python)
+         │
+         ├── test.py (Basic)
+         ├── crypto_crawler_advanced.py (Advanced)
+         │
+         ▼
+    Apache Kafka Topics
+         │
+         ├── crypto.trades.raw
+         ├── crypto.ohlcv.1m
+         ├── crypto.market.data
+         │
+         ▼
+    ┌────────────────────────────────┐
+    │   Apache Airflow DAGs          │
+    │   (Orchestration)              │
+    └────────────────────────────────┘
+         │
+         ├─► Batch Processing (Spark)
+         │   - Daily aggregations
+         │   - Feature engineering
+         │   - ML model training
+         │
+         ├─► Stream Processing (Spark)
+         │   - Real-time analytics
+         │   - Anomaly detection
+         │   - Live predictions
+         │
+         ▼
+    Storage Layer
+         │
+         ├── HDFS (Batch data)
+         ├── HBase (Batch views)
+         └── Redis (Real-time views)
+         │
+         ▼
+    Serving Layer (API + Dashboard)
+```
+
+## 🧪 Testing Strategy
+
+### Unit Tests
+
+```bash
+# Test individual crawlers
+pytest tests/test_crawlers.py
+
+# Test Airflow DAGs
+pytest tests/test_dags.py
+
+# Test Kafka integration
+pytest tests/test_kafka_integration.py
+```
+
+### Integration Tests
+
+```bash
+# Test full ETL pipeline
+airflow dags test crypto_etl_dag 2025-11-10
+
+# Test specific task
+airflow tasks test crypto_etl_dag crawl_coingecko 2025-11-10
+```
+
+### Load Testing
+
+```bash
+# Simulate high throughput
+python scripts/load_test_kafka.py --rate 10000 --duration 300
+```
+
+---
+
+## 📈 Monitoring & Observability
+
+### Metrics to Track
+
+**Crawler Metrics:**
+
+- Requests per second
+- Success rate
+- Response time
+- Error rate
+
+**Airflow Metrics:**
+
+- DAG success rate
+- Task duration
+- Queue size
+- Worker utilization
+
+**Kafka Metrics:**
+
+- Message throughput
+- Consumer lag
+- Partition distribution
+- Disk usage
+
+**Data Quality Metrics:**
+
+- Missing values %
+- Duplicate records
+- Schema violations
+- Freshness (time since last update)
+
+### Monitoring Tools
+
+```bash
+# Airflow metrics
+http://localhost:8080/health
+
+# Prometheus metrics endpoint
+http://localhost:9090
+
+# Grafana dashboards
+http://localhost:3000
+```
+
+---
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+#### 1. Airflow DAG not appearing
+
+```bash
+# Check DAG file syntax
+python airflow/dags/crypto_etl_dag.py
+
+# Refresh DAGs
+airflow dags list-import-errors
+```
+
+#### 2. Kafka connection failed
+
+```bash
+# Check Kafka status
+kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+# Test connectivity
+telnet localhost 9092
+```
+
+#### 3. Rate limit exceeded
+
+```python
+# Add exponential backoff
+from tenacity import retry, wait_exponential
+
+@retry(wait=wait_exponential(multiplier=1, min=4, max=60))
+def crawl_with_retry():
+    return crawler.get_data()
+```
+
+#### 4. Memory issues in Spark
+
+```python
+# Increase executor memory
+spark.conf.set("spark.executor.memory", "8g")
+spark.conf.set("spark.driver.memory", "4g")
+
+# Repartition data
+df = df.repartition(200)
+```
+
+#### 5. Airflow task stuck in running
+
+```bash
+# Kill zombie tasks
+airflow tasks clear crypto_etl_dag --task-regex 'crawl.*' --start-date 2025-11-10
+
+# Restart scheduler
+pkill -f "airflow scheduler"
+airflow scheduler &
+```
+
+---
+
+## 📊 Performance Optimization
+
+### Crawler Optimization
+
+```python
+# Use async/await for concurrent requests
+import asyncio
+import aiohttp
+
+async def crawl_async(symbols):
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_price(session, symbol) for symbol in symbols]
+        return await asyncio.gather(*tasks)
+
+# Result: 10x faster than sequential
+```
+
+### Airflow Optimization
+
+```python
+# Enable parallelism
+AIRFLOW__CORE__PARALLELISM = 32
+AIRFLOW__CORE__DAG_CONCURRENCY = 16
+AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG = 3
+
+# Use connection pooling
+AIRFLOW__CORE__SQL_ALCHEMY_POOL_SIZE = 10
+```
+
+### Kafka Optimization
+
+```yaml
+# Producer config
+batch.size: 32768
+linger.ms: 10
+compression.type: lz4
+
+# Consumer config
+fetch.min.bytes: 1024
+fetch.max.wait.ms: 500
+```
+
+---
+
+## � Best Practices
+
+### 1. Idempotent DAGs
+
+```python
+# DAGs should be rerunnable without side effects
+# Use upsert instead of insert
+# Check if data already exists before processing
+```
+
+### 2. Data Versioning
+
+```python
+# Include version in file names
+output_path = f"hdfs:///crypto/ohlcv/v1/{date}/"
+
+# Track schema versions
+schema_version = "1.0.0"
+```
+
+### 3. Error Handling
+
+```python
+# Always log errors with context
+try:
+    result = crawler.get_data()
+except Exception as e:
+    logger.error(f"Failed to crawl {symbol}: {e}", exc_info=True)
+    send_alert(f"Crawler failed: {symbol}")
+    raise
+```
+
+### 4. Resource Management
+
+```python
+# Always close connections
+try:
+    producer = KafkaProducer(...)
+    # Use producer
+finally:
+    producer.flush()
+    producer.close()
+```
+
+### 5. Configuration Management
+
+```python
+# Use environment variables
+KAFKA_BROKERS = os.getenv('KAFKA_BROKERS', 'localhost:9092')
+
+# Never hardcode credentials
+API_KEY = os.getenv('COINGECKO_API_KEY')
+```
+
+---
+
+## 🔐 Security Considerations
+
+### API Keys
+
+```bash
+# Use Airflow Connections for secrets
+airflow connections add 'coingecko_api' \
+    --conn-type 'http' \
+    --conn-password 'your_api_key'
+
+# Access in DAG
+from airflow.hooks.base import BaseHook
+conn = BaseHook.get_connection('coingecko_api')
+api_key = conn.password
+```
+
+### Network Security
+
+```yaml
+# Use TLS for Kafka
+security.protocol: SSL
+ssl.truststore.location: /path/to/truststore.jks
+```
+
+### Data Privacy
+
+```python
+# Anonymize sensitive data
+df = df.withColumn('user_id', hash_udf('user_id'))
+```
+
+---
+
+## 📚 Additional Resources
+
+### Documentation
+
+- [Apache Airflow Docs](https://airflow.apache.org/docs/)
+- [Kafka Python Client](https://kafka-python.readthedocs.io/)
+- [PySpark Documentation](https://spark.apache.org/docs/latest/api/python/)
+
+### Monitoring Dashboards
+
+- Airflow UI: http://localhost:8080
+- Kafka Manager: http://localhost:9000
+- Grafana: http://localhost:3000
+
+### Sample Queries
+
+```python
+# Query from HBase
+from happybase import Connection
+
+conn = Connection('localhost')
+table = conn.table('crypto_ohlcv')
+
+# Scan recent data
+for key, data in table.scan(row_prefix=b'BTC_'):
+    print(key, data)
+```
+
+---
+
+## 📝 Changelog
+
+### Version 2.0.0 (2025-11-10)
+
+- ✅ Added Airflow integration
+- ✅ Added Kafka streaming support
+- ✅ Added 3 production DAGs
+- ✅ Enhanced monitoring and logging
+- ✅ Added comprehensive testing guide
+
+### Version 1.0.0 (2025-10-20)
+
+- ✅ Initial release
+- ✅ Basic and advanced crawlers
+- ✅ Standalone mode support
+
+---
+
+**Ready to Deploy! 🚀**
+
+Start with standalone mode for development, then migrate to Airflow orchestration for production.
+
+### Mode 1: Standalone Mode (Development)
+
+#### File 1: `test.py` - Basic Crawler
+
+Crawler cơ bản với CoinGecko API cho development và testing:
 
 ```bash
 cd data
@@ -36,7 +422,11 @@ python test.py
 
 **Output:** Tạo thư mục `crypto_data/` với các file CSV và JSON
 
-### File 2: `crypto_crawler_advanced.py` - Advanced Crawler
+**Use Case:** Quick testing, data exploration, prototyping
+
+---
+
+#### File 2: `crypto_crawler_advanced.py` - Advanced Crawler
 
 Crawler nâng cao với nhiều nguồn dữ liệu:
 
@@ -66,6 +456,200 @@ python crypto_crawler_advanced.py
 - ✅ Scheduled tasks (tự động crawl định kỳ)
 - ✅ Logging system
 
+**Use Case:** Production-ready crawler, continuous data collection
+
+---
+
+### Mode 2: Airflow Orchestration Mode (Production)
+
+#### Setup Airflow
+
+```bash
+# Initialize Airflow database
+export AIRFLOW_HOME=~/airflow
+airflow db init
+
+# Create admin user
+airflow users create \
+    --username admin \
+    --password admin \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email admin@example.com
+
+# Start Airflow webserver
+airflow webserver --port 8080 &
+
+# Start Airflow scheduler
+airflow scheduler &
+```
+
+#### DAG 1: `crypto_etl_dag.py` - Daily ETL Pipeline
+
+**Purpose:** Automated daily data collection and processing
+
+**Schedule:** Runs daily at 2:00 AM
+
+**Tasks Flow:**
+
+```python
+start → crawl_coingecko → crawl_binance →
+validate_data → publish_to_kafka →
+load_to_hdfs → trigger_spark_batch →
+save_to_hbase → update_dashboard → end
+```
+
+**Manual Trigger:**
+
+```bash
+# Trigger DAG manually
+airflow dags trigger crypto_etl_dag
+
+# Check DAG status
+airflow dags list
+
+# View task logs
+airflow tasks logs crypto_etl_dag crawl_coingecko 2025-11-10
+```
+
+**Configuration:**
+
+```python
+# airflow/dags/crypto_etl_dag.py
+default_args = {
+    'owner': 'crypto_team',
+    'depends_on_past': False,
+    'email_on_failure': True,
+    'email_on_retry': False,
+    'retries': 3,
+    'retry_delay': timedelta(minutes=5),
+}
+
+dag = DAG(
+    'crypto_etl_dag',
+    default_args=default_args,
+    description='Daily cryptocurrency ETL pipeline',
+    schedule_interval='0 2 * * *',  # Daily at 2 AM
+    start_date=datetime(2025, 1, 1),
+    catchup=False,
+    tags=['crypto', 'etl', 'daily'],
+)
+```
+
+---
+
+#### DAG 2: `ml_pipeline_dag.py` - ML Training Pipeline
+
+**Purpose:** Weekly model training and evaluation
+
+**Schedule:** Runs every Sunday at 3:00 AM
+
+**Tasks Flow:**
+
+```python
+start → extract_features →
+feature_engineering → train_price_predictor →
+train_anomaly_detector → evaluate_models →
+deploy_best_model → update_model_registry →
+send_report → end
+```
+
+**Manual Trigger:**
+
+```bash
+airflow dags trigger ml_pipeline_dag
+
+# Backfill for specific date range
+airflow dags backfill ml_pipeline_dag \
+    --start-date 2025-10-01 \
+    --end-date 2025-10-31
+```
+
+**Configuration:**
+
+```python
+dag = DAG(
+    'ml_pipeline_dag',
+    default_args=default_args,
+    description='Weekly ML model training and deployment',
+    schedule_interval='0 3 * * 0',  # Weekly on Sunday at 3 AM
+    start_date=datetime(2025, 1, 1),
+    catchup=False,
+    tags=['crypto', 'ml', 'training'],
+)
+```
+
+---
+
+#### DAG 3: `reporting_dag.py` - Analytics & Reporting
+
+**Purpose:** Generate daily reports and metrics
+
+**Schedule:** Runs daily at 8:00 AM
+
+**Tasks Flow:**
+
+```python
+start → aggregate_daily_stats →
+calculate_portfolio_metrics →
+compute_risk_metrics → check_alerts →
+generate_report → send_email →
+update_dashboard_db → end
+```
+
+**Manual Trigger:**
+
+```bash
+airflow dags trigger reporting_dag
+```
+
+---
+
+### Mode 3: Kafka Integration Mode (Real-time)
+
+#### Kafka Producer Integration
+
+```python
+"""
+Integrate crawler with Kafka for real-time streaming
+"""
+from kafka import KafkaProducer
+import json
+
+# Initialize Kafka producer
+producer = KafkaProducer(
+    bootstrap_servers=['localhost:9092'],
+    value_serializer=lambda v: json.dumps(v).encode('utf-8')
+)
+
+# Send data to Kafka topic
+def send_to_kafka(data, topic='crypto.ohlcv.1m'):
+    try:
+        future = producer.send(topic, value=data)
+        record_metadata = future.get(timeout=10)
+        print(f"Sent to {record_metadata.topic} partition {record_metadata.partition}")
+    except Exception as e:
+        print(f"Error sending to Kafka: {e}")
+
+# Example: Crawl and stream to Kafka
+from crypto_crawler_advanced import AdvancedCryptoCrawler
+
+crawler = AdvancedCryptoCrawler()
+df = crawler.crawl_binance_klines('BTCUSDT', interval='1m', limit=1)
+
+# Convert to dict and send
+for row in df.to_dict('records'):
+    send_to_kafka(row, topic='crypto.ohlcv.1m')
+```
+
+#### Run Continuous Streaming
+
+```bash
+# Run crawler with Kafka output
+python scripts/kafka_streaming_producer.py --symbols BTC,ETH,BNB --interval 1m
+```
+
 ## 📊 Dữ Liệu Thu Thập Được
 
 ### CoinGecko Data
@@ -83,7 +667,218 @@ python crypto_crawler_advanced.py
 - **Orderbook:** Bid/Ask depth data
 - **Technical Indicators:** SMA, EMA, MACD, RSI, Bollinger Bands
 
-## 🔧 Tùy Chỉnh
+## � Airflow Web UI
+
+### Access Dashboard
+
+```bash
+# Open browser
+http://localhost:8080
+
+# Login credentials
+Username: admin
+Password: admin
+```
+
+### Monitor DAGs
+
+1. **DAGs View**: See all DAGs and their schedules
+2. **Graph View**: Visualize task dependencies
+3. **Gantt View**: Analyze task execution timeline
+4. **Tree View**: Historical runs overview
+5. **Logs View**: Debug task failures
+
+### Key Metrics to Monitor
+
+- ✅ DAG success rate
+- ✅ Task duration
+- ✅ Data volume processed
+- ✅ Retry attempts
+- ✅ Failed tasks
+
+---
+
+## 🔄 Complete Workflow Example
+
+### Scenario: Daily Production Pipeline
+
+**Time: 2:00 AM** - Airflow triggers `crypto_etl_dag`
+
+```
+1. Task: crawl_coingecko
+   - Crawls top 100 coins
+   - Saves to temp storage
+   Duration: 5 minutes
+
+2. Task: crawl_binance
+   - Crawls OHLCV data for 100 symbols
+   - Saves to temp storage
+   Duration: 10 minutes
+
+3. Task: validate_data
+   - Schema validation
+   - Data quality checks
+   - Remove duplicates
+   Duration: 2 minutes
+
+4. Task: publish_to_kafka
+   - Send validated data to Kafka topics
+   - crypto.ohlcv.1m
+   - crypto.market.data
+   Duration: 3 minutes
+
+5. Task: load_to_hdfs
+   - Batch load from Kafka to HDFS
+   - Partition by date and symbol
+   Duration: 15 minutes
+
+6. Task: trigger_spark_batch
+   - Submit Spark job for aggregations
+   - Calculate technical indicators
+   - Feature engineering
+   Duration: 30 minutes
+
+7. Task: save_to_hbase
+   - Save batch views to HBase
+   Duration: 10 minutes
+
+8. Task: update_dashboard
+   - Refresh dashboard metrics
+   Duration: 2 minutes
+
+Total Pipeline Duration: ~77 minutes
+```
+
+**Time: 8:00 AM** - Airflow triggers `reporting_dag`
+
+```
+Generate daily reports with fresh data
+Send email alerts if anomalies detected
+```
+
+**Time: 3:00 AM (Sunday)** - Airflow triggers `ml_pipeline_dag`
+
+```
+Train ML models with past week's data
+Deploy new models if performance improved
+```
+
+---
+
+## 🛠️ Advanced Airflow Features
+
+### 1. Dynamic DAG Generation
+
+```python
+# Generate DAGs for multiple symbols
+SYMBOLS = ['BTC', 'ETH', 'BNB', 'ADA', 'SOL']
+
+for symbol in SYMBOLS:
+    dag_id = f'crypto_etl_{symbol.lower()}'
+
+    dag = DAG(
+        dag_id,
+        default_args=default_args,
+        schedule_interval='*/15 * * * *',  # Every 15 minutes
+        tags=['crypto', symbol]
+    )
+
+    # Define tasks...
+    globals()[dag_id] = dag
+```
+
+### 2. XComs for Data Passing
+
+```python
+# Task 1: Crawl data and push to XCom
+def crawl_data(**context):
+    data = crawler.get_top_cryptocurrencies(100)
+    context['task_instance'].xcom_push(key='crypto_data', value=data)
+
+# Task 2: Pull from XCom and process
+def process_data(**context):
+    data = context['task_instance'].xcom_pull(key='crypto_data')
+    # Process data...
+```
+
+### 3. Sensors for External Dependencies
+
+```python
+from airflow.sensors.filesystem import FileSensor
+
+wait_for_file = FileSensor(
+    task_id='wait_for_data_file',
+    filepath='/data/crypto/latest.csv',
+    poke_interval=60,
+    timeout=3600,
+    dag=dag
+)
+```
+
+### 4. Branching for Conditional Logic
+
+```python
+from airflow.operators.python import BranchPythonOperator
+
+def decide_processing(**context):
+    data_size = context['task_instance'].xcom_pull(key='data_size')
+    if data_size > 1000000:
+        return 'heavy_processing'
+    else:
+        return 'light_processing'
+
+branch = BranchPythonOperator(
+    task_id='branch_task',
+    python_callable=decide_processing,
+    dag=dag
+)
+```
+
+### 5. Callbacks for Notifications
+
+```python
+def on_failure_callback(context):
+    """Send Slack/Email notification on failure"""
+    send_alert(f"DAG {context['dag'].dag_id} failed!")
+
+dag = DAG(
+    'crypto_etl_dag',
+    default_args={
+        'on_failure_callback': on_failure_callback,
+    }
+)
+```
+
+---
+
+## �🔧 Tùy Chỉnh
+
+### Crawler Configuration
+
+```python
+# config/crawler_config.yaml
+sources:
+  coingecko:
+    enabled: true
+    symbols: 100
+    rate_limit: 50  # requests per minute
+
+  binance:
+    enabled: true
+    symbols: ['BTCUSDT', 'ETHUSDT', 'BNBUSDT']
+    intervals: ['1m', '5m', '1h', '1d']
+
+storage:
+  output_format: 'parquet'  # csv, json, parquet
+  compression: 'snappy'
+
+kafka:
+  enabled: true
+  bootstrap_servers: 'localhost:9092'
+  topics:
+    ohlcv: 'crypto.ohlcv.1m'
+    trades: 'crypto.trades.raw'
+```
 
 ### Thay đổi số lượng coins crawl:
 
@@ -97,6 +892,22 @@ top_coins = crawler.get_top_cryptocurrencies(limit=200)  # Thay đổi từ 50 -
 ```python
 # Crawl 90 ngày thay vì 30 ngày
 historical = crawler.get_historical_data('bitcoin', days=90)
+```
+
+### Airflow DAG Schedule Customization:
+
+```python
+# Chạy mỗi 15 phút
+schedule_interval='*/15 * * * *'
+
+# Chạy mỗi giờ
+schedule_interval='0 * * * *'
+
+# Chạy mỗi ngày lúc 2:30 AM
+schedule_interval='30 2 * * *'
+
+# Chạy mỗi thứ 2 lúc 8:00 AM
+schedule_interval='0 8 * * 1'
 ```
 
 ### Thay đổi trading pair trên Binance:
