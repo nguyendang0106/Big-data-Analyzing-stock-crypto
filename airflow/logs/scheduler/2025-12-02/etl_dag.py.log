@@ -3269,3 +3269,115 @@ SyntaxError: invalid non-printable character U+00A0
 [2025-12-02T09:46:09.356+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:46:09.355+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-12-02T09:46:09.371+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:46:09.370+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
 [2025-12-02T09:46:09.386+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.437 seconds
+[2025-12-02T09:46:39.458+0000] {processor.py:161} INFO - Started process (PID=1148) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:46:39.459+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:46:39.463+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:46:39.461+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:46:40.017+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:46:40.032+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:46:40.032+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:46:40.047+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:46:40.047+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:46:40.082+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.632 seconds
+[2025-12-02T09:47:10.242+0000] {processor.py:161} INFO - Started process (PID=1212) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:47:10.243+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:47:10.245+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:47:10.245+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:47:10.668+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:47:10.683+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:47:10.682+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:47:10.697+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:47:10.697+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:47:10.715+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.481 seconds
+[2025-12-02T09:47:40.917+0000] {processor.py:161} INFO - Started process (PID=1268) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:47:40.918+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:47:40.919+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:47:40.919+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:47:41.262+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:47:41.273+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:47:41.272+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:47:41.284+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:47:41.284+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:47:41.301+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.388 seconds
+[2025-12-02T09:48:11.379+0000] {processor.py:161} INFO - Started process (PID=1331) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:48:11.380+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:48:11.381+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:48:11.381+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:48:11.747+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:48:11.758+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:48:11.757+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:48:11.771+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:48:11.771+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:48:11.784+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.409 seconds
+[2025-12-02T09:48:41.925+0000] {processor.py:161} INFO - Started process (PID=1394) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:48:41.926+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:48:41.928+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:48:41.928+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:48:42.382+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:48:42.396+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:48:42.396+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:48:42.411+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:48:42.411+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:48:42.427+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.506 seconds
+[2025-12-02T09:49:12.523+0000] {processor.py:161} INFO - Started process (PID=1458) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:49:12.524+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:49:12.527+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:49:12.526+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:49:12.967+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:49:12.982+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:49:12.982+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:49:12.999+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:49:12.999+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:49:13.024+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.507 seconds
+[2025-12-02T09:49:43.105+0000] {processor.py:161} INFO - Started process (PID=1521) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:49:43.107+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:49:43.108+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:49:43.108+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:49:43.567+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:49:43.583+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:49:43.583+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:49:43.599+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:49:43.599+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:49:43.619+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.518 seconds
+[2025-12-02T09:50:14.279+0000] {processor.py:161} INFO - Started process (PID=1581) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:50:14.281+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:50:14.282+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:50:14.282+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:50:14.650+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:50:14.662+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:50:14.661+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:50:14.676+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:50:14.676+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:50:14.689+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.414 seconds
+[2025-12-02T09:50:45.209+0000] {processor.py:161} INFO - Started process (PID=1641) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:50:45.210+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:50:45.212+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:50:45.212+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:50:45.574+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:50:45.585+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:50:45.585+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:50:45.598+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:50:45.598+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:50:45.613+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.408 seconds
+[2025-12-02T09:51:16.576+0000] {processor.py:161} INFO - Started process (PID=1701) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:51:16.577+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:51:16.579+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:51:16.579+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:51:16.941+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:51:16.954+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:51:16.954+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:51:16.971+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:51:16.971+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:51:16.986+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.414 seconds
+[2025-12-02T09:51:47.354+0000] {processor.py:161} INFO - Started process (PID=1761) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:51:47.355+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:51:47.357+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:51:47.357+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:51:47.948+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:51:47.966+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:51:47.966+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:51:47.984+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:51:47.983+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:51:48.005+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.658 seconds
+[2025-12-02T09:52:18.701+0000] {processor.py:161} INFO - Started process (PID=1821) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:52:18.702+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:52:18.705+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:52:18.704+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:52:19.465+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:52:19.514+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:52:19.513+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:52:19.555+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:52:19.555+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:52:19.605+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.915 seconds
+[2025-12-02T09:52:49.731+0000] {processor.py:161} INFO - Started process (PID=1881) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:52:49.732+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:52:49.734+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:52:49.734+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:52:50.184+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:52:50.197+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:52:50.197+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:52:50.212+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:52:50.212+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:52:50.228+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.502 seconds
+[2025-12-02T09:53:20.418+0000] {processor.py:161} INFO - Started process (PID=1942) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:53:20.419+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:53:20.421+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:53:20.421+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:53:20.758+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:53:20.769+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:53:20.769+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:53:20.782+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:53:20.782+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:53:20.797+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.383 seconds
+[2025-12-02T09:53:50.961+0000] {processor.py:161} INFO - Started process (PID=2002) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:53:50.963+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:53:50.965+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:53:50.965+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:53:51.601+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:53:51.621+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:53:51.620+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:53:51.642+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:53:51.642+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:53:51.665+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.711 seconds
+[2025-12-02T09:54:22.225+0000] {processor.py:161} INFO - Started process (PID=2063) to work on /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:54:22.226+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/etl_dag.py for tasks to queue
+[2025-12-02T09:54:22.227+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:54:22.227+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:54:22.648+0000] {processor.py:840} INFO - DAG(s) 'crypto_cold_path_gcs_1am' retrieved from /opt/airflow/dags/etl_dag.py
+[2025-12-02T09:54:22.664+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:54:22.663+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-12-02T09:54:22.680+0000] {logging_mixin.py:188} INFO - [2025-12-02T09:54:22.680+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_cold_path_gcs_1am to 2025-12-02 01:00:00+00:00, run_after=2025-12-03 01:00:00+00:00
+[2025-12-02T09:54:22.697+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/etl_dag.py took 0.476 seconds
