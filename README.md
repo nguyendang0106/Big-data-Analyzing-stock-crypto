@@ -10,96 +10,96 @@ Hệ thống thu thập, lưu trữ và phân tích dữ liệu chứng khoán t
 
 - **Nguồn dữ liệu:**
 
-  - API sàn giao dịch chứng khoán
-  - Web scraping từ các trang tài chính
-  - Dữ liệu streaming real-time
-  - Dữ liệu lịch sử từ các nhà cung cấp
+- API sàn giao dịch chứng khoán
+- Web scraping từ các trang tài chính
+- Dữ liệu streaming real-time
+- Dữ liệu lịch sử từ các nhà cung cấp
 
 - **Công nghệ sử dụng:**
-  - Apache Kafka: Message broker cho streaming data
-  - Apache NiFi: ETL và data flow automation
-  - Python Scripts: Thu thập dữ liệu từ API
-  - Web Scrapers: BeautifulSoup, Scrapy
+- Apache Kafka: Message broker cho streaming data
+- Apache NiFi: ETL và data flow automation
+- Python Scripts: Thu thập dữ liệu từ API
+- Web Scrapers: BeautifulSoup, Scrapy
 
 ### 2. **Tầng Lưu Trữ Dữ Liệu (Data Storage Layer)**
 
 - **Raw Data Storage:**
 
-  - HDFS (Hadoop Distributed File System)
-  - Amazon S3 / MinIO
-  - Data Lake architecture
+- HDFS (Hadoop Distributed File System)
+- Amazon S3 / MinIO
+- Data Lake architecture
 
 - **Structured Data Storage:**
-  - Apache HBase: NoSQL database cho time-series data
-  - PostgreSQL/MySQL: Dữ liệu có cấu trúc
-  - Redis: Cache và real-time data
-  - Elasticsearch: Search và analytics
+- Apache HBase: NoSQL database cho time-series data
+- PostgreSQL/MySQL: Dữ liệu có cấu trúc
+- Redis: Cache và real-time data
+- Elasticsearch: Search và analytics
 
 ### 3. **Tầng Xử Lý Dữ Liệu (Data Processing Layer)**
 
 - **Batch Processing:**
 
-  - Apache Spark: Xử lý batch data
-  - Apache Hive: Data warehousing và SQL queries
-  - Apache Airflow: Workflow orchestration
+- Apache Spark: Xử lý batch data
+- Apache Hive: Data warehousing và SQL queries
+- Apache Airflow: Workflow orchestration
 
 - **Stream Processing:**
-  - Apache Spark Streaming
-  - Apache Flink
-  - Kafka Streams
+- Apache Spark Streaming
+- Apache Flink
+- Kafka Streams
 
 ### 4. **Tầng Phân Tích và Machine Learning**
 
 - **Phân tích dữ liệu:**
 
-  - Pandas, NumPy: Data manipulation
-  - Statistical analysis
-  - Technical indicators calculation
+- Pandas, NumPy: Data manipulation
+- Statistical analysis
+- Technical indicators calculation
 
 - **Machine Learning:**
-  - Scikit-learn: Traditional ML models
-  - TensorFlow/PyTorch: Deep Learning
-  - MLflow: Model tracking và deployment
-  - Feature engineering pipeline
+- Scikit-learn: Traditional ML models
+- TensorFlow/PyTorch: Deep Learning
+- MLflow: Model tracking và deployment
+- Feature engineering pipeline
 
 ### 5. **Tầng Trực Quan Hóa (Visualization Layer)**
 
 - **Dashboard và Reporting:**
 
-  - Apache Superset
-  - Grafana
-  - Tableau/Power BI
-  - Custom web dashboard (React/Vue.js)
+- Apache Superset
+- Grafana
+- Tableau/Power BI
+- Custom web dashboard (React/Vue.js)
 
 - **Real-time Monitoring:**
-  - WebSocket connections
-  - Live charts và indicators
-  - Alert system
+- WebSocket connections
+- Live charts và indicators
+- Alert system
 
 ## Các Tính Năng Chính
 
-### 📊 Thu Thập Dữ Liệu
+### Thu Thập Dữ Liệu
 
 - Thu thập dữ liệu giá cổ phiếu theo thời gian thực
 - Lấy thông tin công ty, báo cáo tài chính
 - Thu thập tin tức, sentiment từ social media
 - Dữ liệu macro kinh tế
 
-### 💾 Lưu Trữ và Quản Lý
+### Lưu Trữ và Quản Lý
 
 - Lưu trữ phân tán với khả năng mở rộng cao
 - Data partitioning theo thời gian và mã chứng khoán
 - Data retention policy
 - Backup và disaster recovery
 
-### 🔄 Xử Lý Dữ Liệu
+### Xử Lý Dữ Liệu
 
 - Làm sạch và chuẩn hóa dữ liệu
 - Tính toán các chỉ số kỹ thuật (MA, RSI, MACD, Bollinger Bands...)
 - Aggregation và statistical analysis
 - Real-time data transformation
 
-### 🤖 Phân Tích và Dự Đoán
+### Phân Tích và Dự Đoán
 
 - Phân tích xu hướng giá
 - Phát hiện patterns và anomalies
@@ -108,7 +108,7 @@ Hệ thống thu thập, lưu trữ và phân tích dữ liệu chứng khoán t
 - Risk analysis
 - Sentiment analysis
 
-### 📈 Trực Quan Hóa
+### Trực Quan Hóa
 
 - Biểu đồ giá real-time (candlestick, line chart)
 - Technical indicators overlay
@@ -192,24 +192,24 @@ python jobs/stream_processing.py
 
 ```
 stock-data-system/
-├── config/                 # Configuration files
-├── data/                   # Data storage
-│   ├── raw/               # Raw data
-│   ├── processed/         # Processed data
-│   └── models/            # Trained models
-├── src/
-│   ├── collectors/        # Data collection modules
-│   ├── processors/        # Data processing
-│   ├── analyzers/         # Analysis modules
-│   ├── models/            # ML models
-│   └── visualizers/       # Visualization
-├── jobs/                  # Spark/Airflow jobs
-├── notebooks/             # Jupyter notebooks
-├── scripts/               # Utility scripts
-├── tests/                 # Unit tests
-├── docker/                # Docker configurations
-├── docs/                  # Documentation
-└── requirements.txt       # Python dependencies
+config/ # Configuration files
+data/ # Data storage
+raw/ # Raw data
+processed/ # Processed data
+models/ # Trained models
+src/
+collectors/ # Data collection modules
+processors/ # Data processing
+analyzers/ # Analysis modules
+models/ # ML models
+visualizers/ # Visualization
+jobs/ # Spark/Airflow jobs
+notebooks/ # Jupyter notebooks
+scripts/ # Utility scripts
+tests/ # Unit tests
+docker/ # Docker configurations
+docs/ # Documentation
+requirements.txt # Python dependencies
 ```
 
 ## API Documentation
@@ -217,12 +217,12 @@ stock-data-system/
 ### REST API Endpoints
 
 ```
-GET  /api/v1/stocks              # Lấy danh sách cổ phiếu
-GET  /api/v1/stocks/{symbol}     # Thông tin chi tiết cổ phiếu
-GET  /api/v1/prices/{symbol}     # Lịch sử giá
-GET  /api/v1/analysis/{symbol}   # Phân tích kỹ thuật
-POST /api/v1/predict             # Dự đoán giá
-GET  /api/v1/news/{symbol}       # Tin tức liên quan
+GET /api/v1/stocks # Lấy danh sách cổ phiếu
+GET /api/v1/stocks/{symbol} # Thông tin chi tiết cổ phiếu
+GET /api/v1/prices/{symbol} # Lịch sử giá
+GET /api/v1/analysis/{symbol} # Phân tích kỹ thuật
+POST /api/v1/predict # Dự đoán giá
+GET /api/v1/news/{symbol} # Tin tức liên quan
 ```
 
 ### WebSocket Streaming

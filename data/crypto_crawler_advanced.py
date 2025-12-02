@@ -43,7 +43,7 @@ class AdvancedCryptoCrawler:
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'
         }
         
-        logger.info("✅ Initialized AdvancedCryptoCrawler")
+        logger.info(" Initialized AdvancedCryptoCrawler")
     
     # ============ COINGECKO METHODS ============
     
@@ -68,11 +68,11 @@ class AdvancedCryptoCrawler:
             df['source'] = 'coingecko'
             df['crawled_at'] = datetime.now()
             
-            logger.info(f"✅ Crawled {len(df)} coins from CoinGecko")
+            logger.info(f" Crawled {len(df)} coins from CoinGecko")
             return df
             
         except Exception as e:
-            logger.error(f"❌ Error crawling CoinGecko: {e}")
+            logger.error(f" Error crawling CoinGecko: {e}")
             return None
     
     def crawl_defi_protocols(self):
@@ -95,11 +95,11 @@ class AdvancedCryptoCrawler:
             df['category'] = 'DeFi'
             df['crawled_at'] = datetime.now()
             
-            logger.info(f"✅ Crawled {len(df)} DeFi protocols")
+            logger.info(f" Crawled {len(df)} DeFi protocols")
             return df
             
         except Exception as e:
-            logger.error(f"❌ Error crawling DeFi protocols: {e}")
+            logger.error(f" Error crawling DeFi protocols: {e}")
             return None
     
     # ============ BINANCE METHODS ============
@@ -126,11 +126,11 @@ class AdvancedCryptoCrawler:
             for col in numeric_cols:
                 df[col] = pd.to_numeric(df[col], errors='coerce')
             
-            logger.info(f"✅ Crawled {len(df)} pairs from Binance")
+            logger.info(f" Crawled {len(df)} pairs from Binance")
             return df
             
         except Exception as e:
-            logger.error(f"❌ Error crawling Binance: {e}")
+            logger.error(f" Error crawling Binance: {e}")
             return None
     
     def crawl_binance_klines(self, symbol='BTCUSDT', interval='1h', limit=100):
@@ -173,11 +173,11 @@ class AdvancedCryptoCrawler:
             df['symbol'] = symbol
             df['interval'] = interval
             
-            logger.info(f"✅ Crawled {len(df)} klines for {symbol}")
+            logger.info(f" Crawled {len(df)} klines for {symbol}")
             return df
             
         except Exception as e:
-            logger.error(f"❌ Error crawling Binance klines: {e}")
+            logger.error(f" Error crawling Binance klines: {e}")
             return None
     
     def crawl_binance_orderbook(self, symbol='BTCUSDT', limit=20):
@@ -207,11 +207,11 @@ class AdvancedCryptoCrawler:
             df['price'] = pd.to_numeric(df['price'])
             df['quantity'] = pd.to_numeric(df['quantity'])
             
-            logger.info(f"✅ Crawled orderbook for {symbol}")
+            logger.info(f" Crawled orderbook for {symbol}")
             return df
             
         except Exception as e:
-            logger.error(f"❌ Error crawling orderbook: {e}")
+            logger.error(f" Error crawling orderbook: {e}")
             return None
     
     # ============ DATA ANALYSIS ============
@@ -266,7 +266,7 @@ class AdvancedCryptoCrawler:
         df['BB_Upper'] = df['BB_Middle'] + (bb_std * 2)
         df['BB_Lower'] = df['BB_Middle'] - (bb_std * 2)
         
-        logger.info("✅ Calculated technical indicators")
+        logger.info(" Calculated technical indicators")
         return df
     
     # ============ SAVE METHODS ============
@@ -274,7 +274,7 @@ class AdvancedCryptoCrawler:
     def save_data(self, df, filename_prefix, format='csv'):
         """Lưu dữ liệu với timestamp"""
         if df is None or df.empty:
-            logger.warning("⚠️ No data to save")
+            logger.warning(" No data to save")
             return None
         
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -289,14 +289,14 @@ class AdvancedCryptoCrawler:
             filepath = self.output_dir / f"{filename_prefix}_{timestamp}.parquet"
             df.to_parquet(filepath, index=False)
         
-        logger.info(f"💾 Saved to {filepath}")
+        logger.info(f" Saved to {filepath}")
         return filepath
     
     # ============ SCHEDULED TASKS ============
     
     def scheduled_crawl_job(self):
         """Job crawl định kỳ"""
-        logger.info("🔄 Starting scheduled crawl job...")
+        logger.info(" Starting scheduled crawl job...")
         
         # Crawl CoinGecko markets
         df_markets = self.crawl_coingecko_markets(limit=100)
@@ -325,11 +325,11 @@ class AdvancedCryptoCrawler:
             df_btc_with_indicators = self.calculate_technical_indicators(df_btc)
             self.save_data(df_btc_with_indicators, 'btc_klines_with_indicators')
         
-        logger.info("✅ Scheduled crawl job completed")
+        logger.info(" Scheduled crawl job completed")
     
     def run_scheduler(self, interval_minutes=60):
         """Chạy crawler theo lịch"""
-        logger.info(f"⏰ Starting scheduler (interval: {interval_minutes} minutes)")
+        logger.info(f" Starting scheduler (interval: {interval_minutes} minutes)")
         
         # Schedule job
         schedule.every(interval_minutes).minutes.do(self.scheduled_crawl_job)
@@ -352,7 +352,7 @@ def main():
     crawler = AdvancedCryptoCrawler(output_dir='crypto_data_advanced')
     
     # Menu
-    print("\n📋 Chọn chức năng:")
+    print("\n Chọn chức năng:")
     print("1. Crawl Top 100 Cryptocurrencies (CoinGecko)")
     print("2. Crawl DeFi Protocols")
     print("3. Crawl Binance 24h Ticker")
@@ -379,7 +379,7 @@ def main():
         df = crawler.crawl_binance_klines('BTCUSDT', interval='1h', limit=168)
         df_with_indicators = crawler.calculate_technical_indicators(df)
         crawler.save_data(df_with_indicators, 'btc_hourly_indicators')
-        print("\n📊 Sample data với technical indicators:")
+        print("\n Sample data với technical indicators:")
         print(df_with_indicators[['open_time', 'close', 'SMA_7', 'RSI', 'MACD']].tail(10))
         
     elif choice == '5':
@@ -387,23 +387,23 @@ def main():
         crawler.save_data(df, 'btc_orderbook')
         
     elif choice == '6':
-        logger.info("🔄 Crawling all sources...")
+        logger.info(" Crawling all sources...")
         crawler.scheduled_crawl_job()
         
     elif choice == '7':
         interval = input("Nhập interval (phút, mặc định 60): ").strip()
         interval = int(interval) if interval.isdigit() else 60
-        print(f"\n⏰ Bắt đầu scheduled crawler (mỗi {interval} phút)...")
+        print(f"\n Bắt đầu scheduled crawler (mỗi {interval} phút)...")
         print("Nhấn Ctrl+C để dừng")
         try:
             crawler.run_scheduler(interval_minutes=interval)
         except KeyboardInterrupt:
-            logger.info("\n⏹️ Stopped scheduler")
+            logger.info("\n⏹ Stopped scheduler")
     
     else:
-        print("❌ Lựa chọn không hợp lệ!")
+        print(" Lựa chọn không hợp lệ!")
     
-    print("\n✅ Hoàn thành!")
+    print("\n Hoàn thành!")
 
 
 if __name__ == "__main__":
