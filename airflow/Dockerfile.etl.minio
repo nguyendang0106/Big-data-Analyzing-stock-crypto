@@ -1,9 +1,0 @@
-FROM python:3.11-slim
-WORKDIR /app
-
-COPY requirements_etl.txt .
-RUN pip install --no-cache-dir -r requirements_etl.txt
-
-COPY ./dags/etl_binance_to_minio.py .
-
-ENTRYPOINT ["python", "./etl_binance_to_minio.py"]

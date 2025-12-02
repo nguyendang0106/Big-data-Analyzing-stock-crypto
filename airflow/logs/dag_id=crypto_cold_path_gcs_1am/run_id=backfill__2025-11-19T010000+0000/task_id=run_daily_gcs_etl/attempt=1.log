@@ -1,0 +1,63 @@
+[2025-12-02T09:43:06.047+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-02T09:43:06.065+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-19T01:00:00+00:00 [queued]>
+[2025-12-02T09:43:06.071+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-19T01:00:00+00:00 [queued]>
+[2025-12-02T09:43:06.073+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-12-02T09:43:06.082+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_daily_gcs_etl> on 2025-11-19 01:00:00+00:00
+[2025-12-02T09:43:06.091+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=89) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-12-02T09:43:06.093+0000] {standard_task_runner.py:63} INFO - Started process 91 to run task
+[2025-12-02T09:43:06.093+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_cold_path_gcs_1am', 'run_daily_gcs_etl', 'backfill__2025-11-19T01:00:00+00:00', '--job-id', '186', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/etl_dag.py', '--cfg-path', '/tmp/tmplkdgz4cj']
+[2025-12-02T09:43:06.094+0000] {standard_task_runner.py:91} INFO - Job 186: Subtask run_daily_gcs_etl
+[2025-12-02T09:43:06.169+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-19T01:00:00+00:00 [running]> on host 33ce2b249896
+[2025-12-02T09:43:06.229+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_cold_path_gcs_1am' AIRFLOW_CTX_TASK_ID='run_daily_gcs_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-11-19T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='backfill__2025-11-19T01:00:00+00:00'
+[2025-12-02T09:43:06.230+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-02T09:43:16.231+0000] {logging_mixin.py:188} INFO - --- BẮT ĐẦU ETL (GCS) CHO NGÀY: 2025-11-19 ---
+[2025-12-02T09:43:16.276+0000] {logging_mixin.py:188} INFO - Đã kết nối GCS thành công.
+[2025-12-02T09:43:16.277+0000] {logging_mixin.py:188} INFO - [Processing Coin: BTCUSDT]
+[2025-12-02T09:43:16.649+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETHUSDT]
+[2025-12-02T09:43:16.928+0000] {logging_mixin.py:188} INFO - [Processing Coin: SOLUSDT]
+[2025-12-02T09:43:17.202+0000] {logging_mixin.py:188} INFO - [Processing Coin: BNBUSDT]
+[2025-12-02T09:43:17.472+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOGEUSDT]
+[2025-12-02T09:43:17.749+0000] {logging_mixin.py:188} INFO - [Processing Coin: XRPUSDT]
+[2025-12-02T09:43:18.030+0000] {logging_mixin.py:188} INFO - [Processing Coin: PEPEUSDT]
+[2025-12-02T09:43:18.286+0000] {logging_mixin.py:188} INFO - [Processing Coin: TONUSDT]
+[2025-12-02T09:43:18.551+0000] {logging_mixin.py:188} INFO - [Processing Coin: SHIBUSDT]
+[2025-12-02T09:43:18.819+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOTUSDT]
+[2025-12-02T09:43:19.082+0000] {logging_mixin.py:188} INFO - [Processing Coin: ADAUSDT]
+[2025-12-02T09:43:19.411+0000] {logging_mixin.py:188} INFO - [Processing Coin: AVAXUSDT]
+[2025-12-02T09:43:19.689+0000] {logging_mixin.py:188} INFO - [Processing Coin: LINKUSDT]
+[2025-12-02T09:43:19.955+0000] {logging_mixin.py:188} INFO - [Processing Coin: TRXUSDT]
+[2025-12-02T09:43:20.225+0000] {logging_mixin.py:188} INFO - [Processing Coin: MATICUSDT]
+[2025-12-02T09:43:20.466+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho MATICUSDT. Bỏ qua.
+[2025-12-02T09:43:20.467+0000] {logging_mixin.py:188} INFO - [Processing Coin: BCHUSDT]
+[2025-12-02T09:43:20.934+0000] {logging_mixin.py:188} INFO - [Processing Coin: ICPUSDT]
+[2025-12-02T09:43:21.202+0000] {logging_mixin.py:188} INFO - [Processing Coin: NEARUSDT]
+[2025-12-02T09:43:42.403+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho NEARUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=NEARUSDT&interval=1m&startTime=1763553600000&endTime=1763596799999&limit=1000 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78703d4a6900>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2025-12-02T09:43:42.404+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho NEARUSDT. Bỏ qua.
+[2025-12-02T09:43:42.405+0000] {logging_mixin.py:188} INFO - [Processing Coin: LTCUSDT]
+[2025-12-02T09:43:42.698+0000] {logging_mixin.py:188} INFO - [Processing Coin: LEOUSD]
+[2025-12-02T09:43:42.826+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho LEOUSD: 400 Client Error: Bad Request for url: https://api.binance.com/api/v3/klines?symbol=LEOUSD&interval=1m&startTime=1763510400000&endTime=1763553599999&limit=1000
+[2025-12-02T09:43:42.827+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho LEOUSD. Bỏ qua.
+[2025-12-02T09:43:42.828+0000] {logging_mixin.py:188} INFO - [Processing Coin: UNIUSDT]
+[2025-12-02T09:43:43.098+0000] {logging_mixin.py:188} INFO - [Processing Coin: FETUSDT]
+[2025-12-02T09:43:43.382+0000] {logging_mixin.py:188} INFO - [Processing Coin: RNDRUSDT]
+[2025-12-02T09:43:43.626+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho RNDRUSDT. Bỏ qua.
+[2025-12-02T09:43:43.627+0000] {logging_mixin.py:188} INFO - [Processing Coin: ATOMUSDT]
+[2025-12-02T09:43:43.905+0000] {logging_mixin.py:188} INFO - [Processing Coin: INJUSDT]
+[2025-12-02T09:43:44.183+0000] {logging_mixin.py:188} INFO - [Processing Coin: WIFUSDT]
+[2025-12-02T09:43:44.452+0000] {logging_mixin.py:188} INFO - [Processing Coin: OPUSDT]
+[2025-12-02T09:44:05.486+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho OPUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=OPUSDT&interval=1m&startTime=1763510400000&endTime=1763553599999&limit=1000 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78703d4a7470>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2025-12-02T09:44:05.486+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho OPUSDT. Bỏ qua.
+[2025-12-02T09:44:05.487+0000] {logging_mixin.py:188} INFO - [Processing Coin: ARBUSDT]
+[2025-12-02T09:44:05.759+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETCUSDT]
+[2025-12-02T09:44:06.067+0000] {logging_mixin.py:188} INFO - [Processing Coin: FILUSDT]
+[2025-12-02T09:44:06.435+0000] {logging_mixin.py:188} INFO - Đã tải về 36000 dòng. Đang xử lý...
+[2025-12-02T09:44:06.603+0000] {logging_mixin.py:188} INFO - Đang ghi 36000 dòng vào GCS (Parquet)...
+[2025-12-02T09:44:09.063+0000] {logging_mixin.py:188} INFO - --- HOÀN TẤT GHI DỮ LIỆU CHO NGÀY: 2025-11-19 ---
+[2025-12-02T09:44:09.076+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-12-02T09:44:09.077+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-02T09:44:09.086+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_cold_path_gcs_1am, task_id=run_daily_gcs_etl, run_id=backfill__2025-11-19T01:00:00+00:00, execution_date=20251119T010000, start_date=20251202T094306, end_date=20251202T094409
+[2025-12-02T09:44:09.131+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-12-02T09:44:09.144+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-02T09:44:09.147+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

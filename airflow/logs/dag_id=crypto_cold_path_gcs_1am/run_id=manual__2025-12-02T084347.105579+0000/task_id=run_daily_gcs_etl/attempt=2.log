@@ -1,0 +1,41 @@
+[2025-12-02T08:53:50.567+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-02T08:53:50.584+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl manual__2025-12-02T08:43:47.105579+00:00 [queued]>
+[2025-12-02T08:53:50.590+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl manual__2025-12-02T08:43:47.105579+00:00 [queued]>
+[2025-12-02T08:53:50.592+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-12-02T08:53:50.600+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_daily_gcs_etl> on 2025-12-02 08:43:47.105579+00:00
+[2025-12-02T08:53:50.606+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=99) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-12-02T08:53:50.607+0000] {standard_task_runner.py:63} INFO - Started process 101 to run task
+[2025-12-02T08:53:50.607+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_cold_path_gcs_1am', 'run_daily_gcs_etl', 'manual__2025-12-02T08:43:47.105579+00:00', '--job-id', '110', '--raw', '--subdir', 'DAGS_FOLDER/etl_dag.py', '--cfg-path', '/tmp/tmpzoi0ev1m']
+[2025-12-02T08:53:50.608+0000] {standard_task_runner.py:91} INFO - Job 110: Subtask run_daily_gcs_etl
+[2025-12-02T08:53:50.681+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl manual__2025-12-02T08:43:47.105579+00:00 [running]> on host 2aa532f4eb24
+[2025-12-02T08:53:50.741+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_cold_path_gcs_1am' AIRFLOW_CTX_TASK_ID='run_daily_gcs_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-12-02T08:43:47.105579+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-02T08:43:47.105579+00:00'
+[2025-12-02T08:53:50.742+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-02T08:54:00.743+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-02T08:54:00.744+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etl_binance_to_gcs.py", line 51, in run_etl
+    print(f"--- BẮT ĐẦU ETL (GCS) CHO NGÀY: {date_to_process.strftime('%Y-%m-%d')} ---")
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'strftime'
+[2025-12-02T08:54:00.758+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=crypto_cold_path_gcs_1am, task_id=run_daily_gcs_etl, run_id=manual__2025-12-02T08:43:47.105579+00:00, execution_date=20251202T084347, start_date=20251202T085350, end_date=20251202T085400
+[2025-12-02T08:54:00.771+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 110 for task run_daily_gcs_etl ('str' object has no attribute 'strftime'; 101)
+[2025-12-02T08:54:00.810+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-12-02T08:54:00.823+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-02T08:54:00.827+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

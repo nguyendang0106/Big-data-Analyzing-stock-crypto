@@ -169,6 +169,12 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    volumes:
+     - C:\Users\Admin\Downloads\decoded-tribute-474915-u9-111f1343f6c0.json:/opt/airflow/gcs_key.json:ro
+     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
+     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
+     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
+     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
 
   airflow-triggerer:
     <<: *airflow-common

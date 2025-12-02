@@ -1,0 +1,84 @@
+[2025-12-02T09:06:15.920+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-02T09:06:15.933+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl manual__2025-12-02T09:06:13.823821+00:00 [queued]>
+[2025-12-02T09:06:15.939+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl manual__2025-12-02T09:06:13.823821+00:00 [queued]>
+[2025-12-02T09:06:15.941+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-12-02T09:06:15.951+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_daily_gcs_etl> on 2025-12-02 09:06:13.823821+00:00
+[2025-12-02T09:06:15.956+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=84) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-12-02T09:06:15.958+0000] {standard_task_runner.py:63} INFO - Started process 86 to run task
+[2025-12-02T09:06:15.958+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_cold_path_gcs_1am', 'run_daily_gcs_etl', 'manual__2025-12-02T09:06:13.823821+00:00', '--job-id', '122', '--raw', '--subdir', 'DAGS_FOLDER/etl_dag.py', '--cfg-path', '/tmp/tmpvwdb0z9g']
+[2025-12-02T09:06:15.959+0000] {standard_task_runner.py:91} INFO - Job 122: Subtask run_daily_gcs_etl
+[2025-12-02T09:06:16.039+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl manual__2025-12-02T09:06:13.823821+00:00 [running]> on host ee2c3d4edd33
+[2025-12-02T09:06:16.108+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_cold_path_gcs_1am' AIRFLOW_CTX_TASK_ID='run_daily_gcs_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-12-02T09:06:13.823821+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-02T09:06:13.823821+00:00'
+[2025-12-02T09:06:16.109+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-02T09:06:26.111+0000] {logging_mixin.py:188} INFO - --- BẮT ĐẦU ETL (GCS) CHO NGÀY: 2025-12-02 ---
+[2025-12-02T09:06:26.114+0000] {logging_mixin.py:188} INFO - Đã kết nối GCS thành công.
+[2025-12-02T09:06:26.114+0000] {logging_mixin.py:188} INFO - [Processing Coin: BTCUSDT]
+[2025-12-02T09:06:26.470+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho BTCUSDT. Bỏ qua.
+[2025-12-02T09:06:26.471+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETHUSDT]
+[2025-12-02T09:06:26.746+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho ETHUSDT. Bỏ qua.
+[2025-12-02T09:06:26.747+0000] {logging_mixin.py:188} INFO - [Processing Coin: SOLUSDT]
+[2025-12-02T09:06:26.998+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho SOLUSDT. Bỏ qua.
+[2025-12-02T09:06:26.999+0000] {logging_mixin.py:188} INFO - [Processing Coin: BNBUSDT]
+[2025-12-02T09:06:27.271+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho BNBUSDT. Bỏ qua.
+[2025-12-02T09:06:27.272+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOGEUSDT]
+[2025-12-02T09:06:27.522+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho DOGEUSDT. Bỏ qua.
+[2025-12-02T09:06:27.523+0000] {logging_mixin.py:188} INFO - [Processing Coin: XRPUSDT]
+[2025-12-02T09:06:27.797+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho XRPUSDT. Bỏ qua.
+[2025-12-02T09:06:27.798+0000] {logging_mixin.py:188} INFO - [Processing Coin: PEPEUSDT]
+[2025-12-02T09:06:28.061+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho PEPEUSDT. Bỏ qua.
+[2025-12-02T09:06:28.061+0000] {logging_mixin.py:188} INFO - [Processing Coin: TONUSDT]
+[2025-12-02T09:06:28.312+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho TONUSDT. Bỏ qua.
+[2025-12-02T09:06:28.313+0000] {logging_mixin.py:188} INFO - [Processing Coin: SHIBUSDT]
+[2025-12-02T09:06:28.570+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho SHIBUSDT. Bỏ qua.
+[2025-12-02T09:06:28.571+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOTUSDT]
+[2025-12-02T09:06:28.822+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho DOTUSDT. Bỏ qua.
+[2025-12-02T09:06:28.822+0000] {logging_mixin.py:188} INFO - [Processing Coin: ADAUSDT]
+[2025-12-02T09:06:29.102+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho ADAUSDT. Bỏ qua.
+[2025-12-02T09:06:29.103+0000] {logging_mixin.py:188} INFO - [Processing Coin: AVAXUSDT]
+[2025-12-02T09:06:29.360+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho AVAXUSDT. Bỏ qua.
+[2025-12-02T09:06:29.361+0000] {logging_mixin.py:188} INFO - [Processing Coin: LINKUSDT]
+[2025-12-02T09:06:29.609+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho LINKUSDT. Bỏ qua.
+[2025-12-02T09:06:29.610+0000] {logging_mixin.py:188} INFO - [Processing Coin: TRXUSDT]
+[2025-12-02T09:06:29.863+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho TRXUSDT. Bỏ qua.
+[2025-12-02T09:06:29.865+0000] {logging_mixin.py:188} INFO - [Processing Coin: MATICUSDT]
+[2025-12-02T09:06:30.103+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho MATICUSDT. Bỏ qua.
+[2025-12-02T09:06:30.103+0000] {logging_mixin.py:188} INFO - [Processing Coin: BCHUSDT]
+[2025-12-02T09:06:30.351+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho BCHUSDT. Bỏ qua.
+[2025-12-02T09:06:30.352+0000] {logging_mixin.py:188} INFO - [Processing Coin: ICPUSDT]
+[2025-12-02T09:06:30.601+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho ICPUSDT. Bỏ qua.
+[2025-12-02T09:06:30.601+0000] {logging_mixin.py:188} INFO - [Processing Coin: NEARUSDT]
+[2025-12-02T09:06:30.851+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho NEARUSDT. Bỏ qua.
+[2025-12-02T09:06:30.852+0000] {logging_mixin.py:188} INFO - [Processing Coin: LTCUSDT]
+[2025-12-02T09:06:31.128+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho LTCUSDT. Bỏ qua.
+[2025-12-02T09:06:31.129+0000] {logging_mixin.py:188} INFO - [Processing Coin: LEOUSD]
+[2025-12-02T09:06:31.256+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho LEOUSD: 400 Client Error: Bad Request for url: https://api.binance.com/api/v3/klines?symbol=LEOUSD&interval=1m&startTime=1764633600000&endTime=1764676799999&limit=1000
+[2025-12-02T09:06:31.258+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho LEOUSD. Bỏ qua.
+[2025-12-02T09:06:31.259+0000] {logging_mixin.py:188} INFO - [Processing Coin: UNIUSDT]
+[2025-12-02T09:06:31.508+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho UNIUSDT. Bỏ qua.
+[2025-12-02T09:06:31.509+0000] {logging_mixin.py:188} INFO - [Processing Coin: FETUSDT]
+[2025-12-02T09:06:31.778+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho FETUSDT. Bỏ qua.
+[2025-12-02T09:06:31.778+0000] {logging_mixin.py:188} INFO - [Processing Coin: RNDRUSDT]
+[2025-12-02T09:06:32.281+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho RNDRUSDT. Bỏ qua.
+[2025-12-02T09:06:32.282+0000] {logging_mixin.py:188} INFO - [Processing Coin: ATOMUSDT]
+[2025-12-02T09:06:32.540+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho ATOMUSDT. Bỏ qua.
+[2025-12-02T09:06:32.541+0000] {logging_mixin.py:188} INFO - [Processing Coin: INJUSDT]
+[2025-12-02T09:06:32.809+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho INJUSDT. Bỏ qua.
+[2025-12-02T09:06:32.810+0000] {logging_mixin.py:188} INFO - [Processing Coin: WIFUSDT]
+[2025-12-02T09:06:33.052+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho WIFUSDT. Bỏ qua.
+[2025-12-02T09:06:33.053+0000] {logging_mixin.py:188} INFO - [Processing Coin: OPUSDT]
+[2025-12-02T09:06:33.319+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho OPUSDT. Bỏ qua.
+[2025-12-02T09:06:33.319+0000] {logging_mixin.py:188} INFO - [Processing Coin: ARBUSDT]
+[2025-12-02T09:06:33.567+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho ARBUSDT. Bỏ qua.
+[2025-12-02T09:06:33.568+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETCUSDT]
+[2025-12-02T09:06:33.869+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho ETCUSDT. Bỏ qua.
+[2025-12-02T09:06:33.870+0000] {logging_mixin.py:188} INFO - [Processing Coin: FILUSDT]
+[2025-12-02T09:06:34.128+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho FILUSDT. Bỏ qua.
+[2025-12-02T09:06:34.129+0000] {logging_mixin.py:188} INFO - Không có dữ liệu nào được tải về. Kết thúc.
+[2025-12-02T09:06:34.129+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-12-02T09:06:34.130+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-02T09:06:34.136+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_cold_path_gcs_1am, task_id=run_daily_gcs_etl, run_id=manual__2025-12-02T09:06:13.823821+00:00, execution_date=20251202T090613, start_date=20251202T090615, end_date=20251202T090634
+[2025-12-02T09:06:34.187+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-12-02T09:06:34.198+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-02T09:06:34.201+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

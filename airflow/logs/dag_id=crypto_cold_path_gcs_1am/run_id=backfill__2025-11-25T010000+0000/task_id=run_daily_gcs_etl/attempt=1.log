@@ -1,0 +1,1038 @@
+[2025-12-02T09:18:58.377+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-02T09:18:58.404+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [queued]>
+[2025-12-02T09:18:58.416+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [queued]>
+[2025-12-02T09:18:58.416+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-12-02T09:18:58.436+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_daily_gcs_etl> on 2025-11-25 01:00:00+00:00
+[2025-12-02T09:18:58.444+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=372) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-12-02T09:18:58.447+0000] {standard_task_runner.py:63} INFO - Started process 387 to run task
+[2025-12-02T09:18:58.447+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_cold_path_gcs_1am', 'run_daily_gcs_etl', 'backfill__2025-11-25T01:00:00+00:00', '--job-id', '137', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/etl_dag.py', '--cfg-path', '/tmp/tmpklao5uu3']
+[2025-12-02T09:18:58.448+0000] {standard_task_runner.py:91} INFO - Job 137: Subtask run_daily_gcs_etl
+[2025-12-02T09:18:58.549+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [running]> on host ee2c3d4edd33
+[2025-12-02T09:18:58.657+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_cold_path_gcs_1am' AIRFLOW_CTX_TASK_ID='run_daily_gcs_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-11-25T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='backfill__2025-11-25T01:00:00+00:00'
+[2025-12-02T09:18:58.658+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-02T09:19:08.660+0000] {logging_mixin.py:188} INFO - --- BẮT ĐẦU ETL (GCS) CHO NGÀY: 2025-11-25 ---
+[2025-12-02T09:19:08.665+0000] {logging_mixin.py:188} INFO - Đã kết nối GCS thành công.
+[2025-12-02T09:19:08.665+0000] {logging_mixin.py:188} INFO - [Processing Coin: BTCUSDT]
+[2025-12-02T09:19:08.991+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETHUSDT]
+[2025-12-02T09:19:09.262+0000] {logging_mixin.py:188} INFO - [Processing Coin: SOLUSDT]
+[2025-12-02T09:19:09.546+0000] {logging_mixin.py:188} INFO - [Processing Coin: BNBUSDT]
+[2025-12-02T09:19:09.829+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOGEUSDT]
+[2025-12-02T09:19:10.176+0000] {logging_mixin.py:188} INFO - [Processing Coin: XRPUSDT]
+[2025-12-02T09:19:10.517+0000] {logging_mixin.py:188} INFO - [Processing Coin: PEPEUSDT]
+[2025-12-02T09:19:31.683+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho PEPEUSDT: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=PEPEUSDT&interval=1m&startTime=1764072000000&endTime=1764115199999&limit=1000 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x79e9d49006e0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2025-12-02T09:19:31.684+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho PEPEUSDT. Bỏ qua.
+[2025-12-02T09:19:31.685+0000] {logging_mixin.py:188} INFO - [Processing Coin: TONUSDT]
+[2025-12-02T09:19:31.975+0000] {logging_mixin.py:188} INFO - [Processing Coin: SHIBUSDT]
+[2025-12-02T09:19:32.248+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOTUSDT]
+[2025-12-02T09:19:32.524+0000] {logging_mixin.py:188} INFO - [Processing Coin: ADAUSDT]
+[2025-12-02T09:19:32.792+0000] {logging_mixin.py:188} INFO - [Processing Coin: AVAXUSDT]
+[2025-12-02T09:19:33.056+0000] {logging_mixin.py:188} INFO - [Processing Coin: LINKUSDT]
+[2025-12-02T09:19:33.312+0000] {logging_mixin.py:188} INFO - [Processing Coin: TRXUSDT]
+[2025-12-02T09:19:33.572+0000] {logging_mixin.py:188} INFO - [Processing Coin: MATICUSDT]
+[2025-12-02T09:19:33.814+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho MATICUSDT. Bỏ qua.
+[2025-12-02T09:19:33.815+0000] {logging_mixin.py:188} INFO - [Processing Coin: BCHUSDT]
+[2025-12-02T09:19:34.081+0000] {logging_mixin.py:188} INFO - [Processing Coin: ICPUSDT]
+[2025-12-02T09:19:34.354+0000] {logging_mixin.py:188} INFO - [Processing Coin: NEARUSDT]
+[2025-12-02T09:19:34.613+0000] {logging_mixin.py:188} INFO - [Processing Coin: LTCUSDT]
+[2025-12-02T09:19:34.895+0000] {logging_mixin.py:188} INFO - [Processing Coin: LEOUSD]
+[2025-12-02T09:19:35.011+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho LEOUSD: 400 Client Error: Bad Request for url: https://api.binance.com/api/v3/klines?symbol=LEOUSD&interval=1m&startTime=1764028800000&endTime=1764071999999&limit=1000
+[2025-12-02T09:19:35.012+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho LEOUSD. Bỏ qua.
+[2025-12-02T09:19:35.013+0000] {logging_mixin.py:188} INFO - [Processing Coin: UNIUSDT]
+[2025-12-02T09:19:35.302+0000] {logging_mixin.py:188} INFO - [Processing Coin: FETUSDT]
+[2025-12-02T09:19:35.564+0000] {logging_mixin.py:188} INFO - [Processing Coin: RNDRUSDT]
+[2025-12-02T09:19:35.820+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho RNDRUSDT. Bỏ qua.
+[2025-12-02T09:19:35.821+0000] {logging_mixin.py:188} INFO - [Processing Coin: ATOMUSDT]
+[2025-12-02T09:19:36.088+0000] {logging_mixin.py:188} INFO - [Processing Coin: INJUSDT]
+[2025-12-02T09:19:36.359+0000] {logging_mixin.py:188} INFO - [Processing Coin: WIFUSDT]
+[2025-12-02T09:19:36.721+0000] {logging_mixin.py:188} INFO - [Processing Coin: OPUSDT]
+[2025-12-02T09:19:36.975+0000] {logging_mixin.py:188} INFO - [Processing Coin: ARBUSDT]
+[2025-12-02T09:19:37.507+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETCUSDT]
+[2025-12-02T09:19:37.790+0000] {logging_mixin.py:188} INFO - [Processing Coin: FILUSDT]
+[2025-12-02T09:19:38.062+0000] {logging_mixin.py:188} INFO - Đã tải về 37440 dòng. Đang xử lý...
+[2025-12-02T09:19:38.191+0000] {logging_mixin.py:188} INFO - Đang ghi 37440 dòng vào GCS (Parquet)...
+[2025-12-02T09:19:38.379+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.383+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.384+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.386+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.390+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.394+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.396+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.566+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.567+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.568+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.570+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.574+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.577+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.580+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.582+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.641+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.643+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.644+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.646+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.648+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.649+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.650+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.655+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.824+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.825+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.829+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:19:38.830+0000] {logging_mixin.py:188} INFO - LỖI khi ghi vào GCS: Invalid Credentials, 401
+[2025-12-02T09:19:38.831+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-12-02T09:19:38.831+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-02T09:19:38.839+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_cold_path_gcs_1am, task_id=run_daily_gcs_etl, run_id=backfill__2025-11-25T01:00:00+00:00, execution_date=20251125T010000, start_date=20251202T091858, end_date=20251202T091938
+[2025-12-02T09:19:38.862+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-12-02T09:19:38.874+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-02T09:19:38.877+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-12-02T09:26:15.147+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-02T09:26:15.178+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [queued]>
+[2025-12-02T09:26:15.192+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [queued]>
+[2025-12-02T09:26:15.193+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-12-02T09:26:15.222+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_daily_gcs_etl> on 2025-11-25 01:00:00+00:00
+[2025-12-02T09:26:15.243+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=92) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-12-02T09:26:15.246+0000] {standard_task_runner.py:63} INFO - Started process 121 to run task
+[2025-12-02T09:26:15.245+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_cold_path_gcs_1am', 'run_daily_gcs_etl', 'backfill__2025-11-25T01:00:00+00:00', '--job-id', '149', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/etl_dag.py', '--cfg-path', '/tmp/tmpam6wozqr']
+[2025-12-02T09:26:15.250+0000] {standard_task_runner.py:91} INFO - Job 149: Subtask run_daily_gcs_etl
+[2025-12-02T09:26:15.386+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [running]> on host bfb7cfd18f31
+[2025-12-02T09:26:15.488+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_cold_path_gcs_1am' AIRFLOW_CTX_TASK_ID='run_daily_gcs_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-11-25T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='backfill__2025-11-25T01:00:00+00:00'
+[2025-12-02T09:26:15.489+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-02T09:26:25.492+0000] {logging_mixin.py:188} INFO - --- BẮT ĐẦU ETL (GCS) CHO NGÀY: 2025-11-25 ---
+[2025-12-02T09:26:25.495+0000] {logging_mixin.py:188} INFO - Đã kết nối GCS thành công.
+[2025-12-02T09:26:25.496+0000] {logging_mixin.py:188} INFO - [Processing Coin: BTCUSDT]
+[2025-12-02T09:26:26.031+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETHUSDT]
+[2025-12-02T09:26:26.408+0000] {logging_mixin.py:188} INFO - [Processing Coin: SOLUSDT]
+[2025-12-02T09:26:26.902+0000] {logging_mixin.py:188} INFO - [Processing Coin: BNBUSDT]
+[2025-12-02T09:26:27.283+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOGEUSDT]
+[2025-12-02T09:26:27.704+0000] {logging_mixin.py:188} INFO - [Processing Coin: XRPUSDT]
+[2025-12-02T09:26:28.056+0000] {logging_mixin.py:188} INFO - [Processing Coin: PEPEUSDT]
+[2025-12-02T09:26:28.412+0000] {logging_mixin.py:188} INFO - [Processing Coin: TONUSDT]
+[2025-12-02T09:26:28.784+0000] {logging_mixin.py:188} INFO - [Processing Coin: SHIBUSDT]
+[2025-12-02T09:26:29.199+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOTUSDT]
+[2025-12-02T09:26:29.553+0000] {logging_mixin.py:188} INFO - [Processing Coin: ADAUSDT]
+[2025-12-02T09:26:29.973+0000] {logging_mixin.py:188} INFO - [Processing Coin: AVAXUSDT]
+[2025-12-02T09:26:30.386+0000] {logging_mixin.py:188} INFO - [Processing Coin: LINKUSDT]
+[2025-12-02T09:26:30.755+0000] {logging_mixin.py:188} INFO - [Processing Coin: TRXUSDT]
+[2025-12-02T09:26:31.115+0000] {logging_mixin.py:188} INFO - [Processing Coin: MATICUSDT]
+[2025-12-02T09:26:31.428+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho MATICUSDT. Bỏ qua.
+[2025-12-02T09:26:31.429+0000] {logging_mixin.py:188} INFO - [Processing Coin: BCHUSDT]
+[2025-12-02T09:26:31.790+0000] {logging_mixin.py:188} INFO - [Processing Coin: ICPUSDT]
+[2025-12-02T09:26:32.161+0000] {logging_mixin.py:188} INFO - [Processing Coin: NEARUSDT]
+[2025-12-02T09:26:32.538+0000] {logging_mixin.py:188} INFO - [Processing Coin: LTCUSDT]
+[2025-12-02T09:26:32.931+0000] {logging_mixin.py:188} INFO - [Processing Coin: LEOUSD]
+[2025-12-02T09:26:33.095+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho LEOUSD: 400 Client Error: Bad Request for url: https://api.binance.com/api/v3/klines?symbol=LEOUSD&interval=1m&startTime=1764028800000&endTime=1764071999999&limit=1000
+[2025-12-02T09:26:33.097+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho LEOUSD. Bỏ qua.
+[2025-12-02T09:26:33.099+0000] {logging_mixin.py:188} INFO - [Processing Coin: UNIUSDT]
+[2025-12-02T09:26:33.593+0000] {logging_mixin.py:188} INFO - [Processing Coin: FETUSDT]
+[2025-12-02T09:26:34.345+0000] {logging_mixin.py:188} INFO - [Processing Coin: RNDRUSDT]
+[2025-12-02T09:26:34.653+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho RNDRUSDT. Bỏ qua.
+[2025-12-02T09:26:34.654+0000] {logging_mixin.py:188} INFO - [Processing Coin: ATOMUSDT]
+[2025-12-02T09:26:35.036+0000] {logging_mixin.py:188} INFO - [Processing Coin: INJUSDT]
+[2025-12-02T09:26:35.389+0000] {logging_mixin.py:188} INFO - [Processing Coin: WIFUSDT]
+[2025-12-02T09:26:35.764+0000] {logging_mixin.py:188} INFO - [Processing Coin: OPUSDT]
+[2025-12-02T09:26:36.351+0000] {logging_mixin.py:188} INFO - [Processing Coin: ARBUSDT]
+[2025-12-02T09:26:36.718+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETCUSDT]
+[2025-12-02T09:26:37.102+0000] {logging_mixin.py:188} INFO - [Processing Coin: FILUSDT]
+[2025-12-02T09:26:37.475+0000] {logging_mixin.py:188} INFO - Đã tải về 38880 dòng. Đang xử lý...
+[2025-12-02T09:26:37.660+0000] {logging_mixin.py:188} INFO - Đang ghi 38880 dòng vào GCS (Parquet)...
+[2025-12-02T09:26:37.872+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:37.876+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:37.883+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:37.884+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:37.888+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:37.890+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:37.891+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:37.893+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:37.956+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.028+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.051+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.058+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.065+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.066+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.072+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.074+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.076+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.125+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.131+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.137+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.145+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.148+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.149+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.151+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.152+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.300+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.312+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:26:38.314+0000] {logging_mixin.py:188} INFO - LỖI khi ghi vào GCS: Invalid Credentials, 401
+[2025-12-02T09:26:38.314+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-12-02T09:26:38.315+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-02T09:26:38.324+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_cold_path_gcs_1am, task_id=run_daily_gcs_etl, run_id=backfill__2025-11-25T01:00:00+00:00, execution_date=20251125T010000, start_date=20251202T092615, end_date=20251202T092638
+[2025-12-02T09:26:38.359+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-12-02T09:26:38.372+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-02T09:26:38.374+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-12-02T09:29:29.911+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-02T09:29:29.942+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [queued]>
+[2025-12-02T09:29:29.952+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [queued]>
+[2025-12-02T09:29:29.954+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-12-02T09:29:29.970+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_daily_gcs_etl> on 2025-11-25 01:00:00+00:00
+[2025-12-02T09:29:29.982+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=85) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-12-02T09:29:29.985+0000] {standard_task_runner.py:63} INFO - Started process 103 to run task
+[2025-12-02T09:29:29.986+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_cold_path_gcs_1am', 'run_daily_gcs_etl', 'backfill__2025-11-25T01:00:00+00:00', '--job-id', '163', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/etl_dag.py', '--cfg-path', '/tmp/tmpel9gpkq9']
+[2025-12-02T09:29:29.989+0000] {standard_task_runner.py:91} INFO - Job 163: Subtask run_daily_gcs_etl
+[2025-12-02T09:29:30.119+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [running]> on host bfb7cfd18f31
+[2025-12-02T09:29:30.216+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_cold_path_gcs_1am' AIRFLOW_CTX_TASK_ID='run_daily_gcs_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-11-25T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='backfill__2025-11-25T01:00:00+00:00'
+[2025-12-02T09:29:30.217+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-02T09:29:40.220+0000] {logging_mixin.py:188} INFO - --- BẮT ĐẦU ETL (GCS) CHO NGÀY: 2025-11-25 ---
+[2025-12-02T09:29:40.225+0000] {logging_mixin.py:188} INFO - Đã kết nối GCS thành công.
+[2025-12-02T09:29:40.226+0000] {logging_mixin.py:188} INFO - [Processing Coin: BTCUSDT]
+[2025-12-02T09:29:40.546+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETHUSDT]
+[2025-12-02T09:29:42.745+0000] {logging_mixin.py:188} INFO - [Processing Coin: SOLUSDT]
+[2025-12-02T09:29:43.304+0000] {logging_mixin.py:188} INFO - [Processing Coin: BNBUSDT]
+[2025-12-02T09:29:43.580+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOGEUSDT]
+[2025-12-02T09:29:43.889+0000] {logging_mixin.py:188} INFO - [Processing Coin: XRPUSDT]
+[2025-12-02T09:29:44.214+0000] {logging_mixin.py:188} INFO - [Processing Coin: PEPEUSDT]
+[2025-12-02T09:29:44.764+0000] {logging_mixin.py:188} INFO - [Processing Coin: TONUSDT]
+[2025-12-02T09:29:45.081+0000] {logging_mixin.py:188} INFO - [Processing Coin: SHIBUSDT]
+[2025-12-02T09:29:45.387+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOTUSDT]
+[2025-12-02T09:29:45.699+0000] {logging_mixin.py:188} INFO - [Processing Coin: ADAUSDT]
+[2025-12-02T09:29:46.064+0000] {logging_mixin.py:188} INFO - [Processing Coin: AVAXUSDT]
+[2025-12-02T09:29:46.404+0000] {logging_mixin.py:188} INFO - [Processing Coin: LINKUSDT]
+[2025-12-02T09:29:46.731+0000] {logging_mixin.py:188} INFO - [Processing Coin: TRXUSDT]
+[2025-12-02T09:29:47.073+0000] {logging_mixin.py:188} INFO - [Processing Coin: MATICUSDT]
+[2025-12-02T09:29:47.359+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho MATICUSDT. Bỏ qua.
+[2025-12-02T09:29:47.364+0000] {logging_mixin.py:188} INFO - [Processing Coin: BCHUSDT]
+[2025-12-02T09:29:47.662+0000] {logging_mixin.py:188} INFO - [Processing Coin: ICPUSDT]
+[2025-12-02T09:29:47.993+0000] {logging_mixin.py:188} INFO - [Processing Coin: NEARUSDT]
+[2025-12-02T09:29:48.331+0000] {logging_mixin.py:188} INFO - [Processing Coin: LTCUSDT]
+[2025-12-02T09:29:48.914+0000] {logging_mixin.py:188} INFO - [Processing Coin: LEOUSD]
+[2025-12-02T09:29:49.052+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho LEOUSD: 400 Client Error: Bad Request for url: https://api.binance.com/api/v3/klines?symbol=LEOUSD&interval=1m&startTime=1764028800000&endTime=1764071999999&limit=1000
+[2025-12-02T09:29:49.054+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho LEOUSD. Bỏ qua.
+[2025-12-02T09:29:49.057+0000] {logging_mixin.py:188} INFO - [Processing Coin: UNIUSDT]
+[2025-12-02T09:29:49.386+0000] {logging_mixin.py:188} INFO - [Processing Coin: FETUSDT]
+[2025-12-02T09:29:49.959+0000] {logging_mixin.py:188} INFO - [Processing Coin: RNDRUSDT]
+[2025-12-02T09:29:50.237+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho RNDRUSDT. Bỏ qua.
+[2025-12-02T09:29:50.238+0000] {logging_mixin.py:188} INFO - [Processing Coin: ATOMUSDT]
+[2025-12-02T09:29:50.514+0000] {logging_mixin.py:188} INFO - [Processing Coin: INJUSDT]
+[2025-12-02T09:29:50.801+0000] {logging_mixin.py:188} INFO - [Processing Coin: WIFUSDT]
+[2025-12-02T09:29:51.136+0000] {logging_mixin.py:188} INFO - [Processing Coin: OPUSDT]
+[2025-12-02T09:29:51.474+0000] {logging_mixin.py:188} INFO - [Processing Coin: ARBUSDT]
+[2025-12-02T09:29:51.830+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETCUSDT]
+[2025-12-02T09:29:52.175+0000] {logging_mixin.py:188} INFO - [Processing Coin: FILUSDT]
+[2025-12-02T09:29:52.511+0000] {logging_mixin.py:188} INFO - Đã tải về 38880 dòng. Đang xử lý...
+[2025-12-02T09:29:52.707+0000] {logging_mixin.py:188} INFO - Đang ghi 38880 dòng vào GCS (Parquet)...
+[2025-12-02T09:29:52.929+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:52.933+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:52.936+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:52.948+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:52.952+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:52.956+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:52.958+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:52.965+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.031+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.101+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.111+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.112+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.115+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.131+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.133+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.137+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.141+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.173+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.184+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.186+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.190+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.211+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.213+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.219+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.222+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.243+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.365+0000] {retry.py:157} ERROR - _request non-retriable exception: Invalid Credentials, 401
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 123, in retry_request
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/core.py", line 430, in _request
+    validate_response(status, contents, path, args)
+  File "/home/airflow/.local/lib/python3.12/site-packages/gcsfs/retry.py", line 110, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Invalid Credentials, 401
+[2025-12-02T09:29:53.367+0000] {logging_mixin.py:188} INFO - LỖI khi ghi vào GCS: Invalid Credentials, 401
+[2025-12-02T09:29:53.368+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-12-02T09:29:53.368+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-02T09:29:53.380+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_cold_path_gcs_1am, task_id=run_daily_gcs_etl, run_id=backfill__2025-11-25T01:00:00+00:00, execution_date=20251125T010000, start_date=20251202T092929, end_date=20251202T092953
+[2025-12-02T09:29:53.425+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-12-02T09:29:53.441+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-02T09:29:53.444+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-12-02T09:39:28.284+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-02T09:39:28.320+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [queued]>
+[2025-12-02T09:39:28.336+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [queued]>
+[2025-12-02T09:39:28.337+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-12-02T09:39:28.357+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_daily_gcs_etl> on 2025-11-25 01:00:00+00:00
+[2025-12-02T09:39:28.367+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=84) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-12-02T09:39:28.370+0000] {standard_task_runner.py:63} INFO - Started process 112 to run task
+[2025-12-02T09:39:28.371+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_cold_path_gcs_1am', 'run_daily_gcs_etl', 'backfill__2025-11-25T01:00:00+00:00', '--job-id', '176', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/etl_dag.py', '--cfg-path', '/tmp/tmp72r4n7nu']
+[2025-12-02T09:39:28.373+0000] {standard_task_runner.py:91} INFO - Job 176: Subtask run_daily_gcs_etl
+[2025-12-02T09:39:28.566+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_cold_path_gcs_1am.run_daily_gcs_etl backfill__2025-11-25T01:00:00+00:00 [running]> on host 33ce2b249896
+[2025-12-02T09:39:28.698+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_cold_path_gcs_1am' AIRFLOW_CTX_TASK_ID='run_daily_gcs_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-11-25T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='backfill__2025-11-25T01:00:00+00:00'
+[2025-12-02T09:39:28.700+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-02T09:39:38.704+0000] {logging_mixin.py:188} INFO - --- BẮT ĐẦU ETL (GCS) CHO NGÀY: 2025-11-25 ---
+[2025-12-02T09:39:38.759+0000] {logging_mixin.py:188} INFO - Đã kết nối GCS thành công.
+[2025-12-02T09:39:38.760+0000] {logging_mixin.py:188} INFO - [Processing Coin: BTCUSDT]
+[2025-12-02T09:39:39.122+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETHUSDT]
+[2025-12-02T09:39:39.423+0000] {logging_mixin.py:188} INFO - [Processing Coin: SOLUSDT]
+[2025-12-02T09:39:39.717+0000] {logging_mixin.py:188} INFO - [Processing Coin: BNBUSDT]
+[2025-12-02T09:39:40.027+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOGEUSDT]
+[2025-12-02T09:39:40.356+0000] {logging_mixin.py:188} INFO - [Processing Coin: XRPUSDT]
+[2025-12-02T09:39:40.660+0000] {logging_mixin.py:188} INFO - [Processing Coin: PEPEUSDT]
+[2025-12-02T09:39:40.957+0000] {logging_mixin.py:188} INFO - [Processing Coin: TONUSDT]
+[2025-12-02T09:39:41.368+0000] {logging_mixin.py:188} INFO - [Processing Coin: SHIBUSDT]
+[2025-12-02T09:39:41.711+0000] {logging_mixin.py:188} INFO - [Processing Coin: DOTUSDT]
+[2025-12-02T09:39:42.031+0000] {logging_mixin.py:188} INFO - [Processing Coin: ADAUSDT]
+[2025-12-02T09:39:42.562+0000] {logging_mixin.py:188} INFO - [Processing Coin: AVAXUSDT]
+[2025-12-02T09:39:42.860+0000] {logging_mixin.py:188} INFO - [Processing Coin: LINKUSDT]
+[2025-12-02T09:39:43.168+0000] {logging_mixin.py:188} INFO - [Processing Coin: TRXUSDT]
+[2025-12-02T09:39:43.503+0000] {logging_mixin.py:188} INFO - [Processing Coin: MATICUSDT]
+[2025-12-02T09:39:43.800+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho MATICUSDT. Bỏ qua.
+[2025-12-02T09:39:43.801+0000] {logging_mixin.py:188} INFO - [Processing Coin: BCHUSDT]
+[2025-12-02T09:39:44.102+0000] {logging_mixin.py:188} INFO - [Processing Coin: ICPUSDT]
+[2025-12-02T09:39:44.501+0000] {logging_mixin.py:188} INFO - [Processing Coin: NEARUSDT]
+[2025-12-02T09:39:44.824+0000] {logging_mixin.py:188} INFO - [Processing Coin: LTCUSDT]
+[2025-12-02T09:39:45.135+0000] {logging_mixin.py:188} INFO - [Processing Coin: LEOUSD]
+[2025-12-02T09:39:45.285+0000] {logging_mixin.py:188} INFO - Lỗi khi gọi API Binance cho LEOUSD: 400 Client Error: Bad Request for url: https://api.binance.com/api/v3/klines?symbol=LEOUSD&interval=1m&startTime=1764028800000&endTime=1764071999999&limit=1000
+[2025-12-02T09:39:45.288+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho LEOUSD. Bỏ qua.
+[2025-12-02T09:39:45.289+0000] {logging_mixin.py:188} INFO - [Processing Coin: UNIUSDT]
+[2025-12-02T09:39:45.621+0000] {logging_mixin.py:188} INFO - [Processing Coin: FETUSDT]
+[2025-12-02T09:39:45.936+0000] {logging_mixin.py:188} INFO - [Processing Coin: RNDRUSDT]
+[2025-12-02T09:39:46.220+0000] {logging_mixin.py:188} INFO -   -> Không lấy đủ 1440 nến cho RNDRUSDT. Bỏ qua.
+[2025-12-02T09:39:46.221+0000] {logging_mixin.py:188} INFO - [Processing Coin: ATOMUSDT]
+[2025-12-02T09:39:46.537+0000] {logging_mixin.py:188} INFO - [Processing Coin: INJUSDT]
+[2025-12-02T09:39:46.841+0000] {logging_mixin.py:188} INFO - [Processing Coin: WIFUSDT]
+[2025-12-02T09:39:47.118+0000] {logging_mixin.py:188} INFO - [Processing Coin: OPUSDT]
+[2025-12-02T09:39:47.463+0000] {logging_mixin.py:188} INFO - [Processing Coin: ARBUSDT]
+[2025-12-02T09:39:47.763+0000] {logging_mixin.py:188} INFO - [Processing Coin: ETCUSDT]
+[2025-12-02T09:39:48.031+0000] {logging_mixin.py:188} INFO - [Processing Coin: FILUSDT]
+[2025-12-02T09:39:48.347+0000] {logging_mixin.py:188} INFO - Đã tải về 38880 dòng. Đang xử lý...
+[2025-12-02T09:39:48.566+0000] {logging_mixin.py:188} INFO - Đang ghi 38880 dòng vào GCS (Parquet)...
+[2025-12-02T09:39:51.242+0000] {logging_mixin.py:188} INFO - LỖI khi ghi vào GCS: 'str' object has no attribute 'strftime'
+[2025-12-02T09:39:51.254+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-12-02T09:39:51.255+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-02T09:39:51.263+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_cold_path_gcs_1am, task_id=run_daily_gcs_etl, run_id=backfill__2025-11-25T01:00:00+00:00, execution_date=20251125T010000, start_date=20251202T093928, end_date=20251202T093951
+[2025-12-02T09:39:51.317+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-12-02T09:39:51.329+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-02T09:39:51.332+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
