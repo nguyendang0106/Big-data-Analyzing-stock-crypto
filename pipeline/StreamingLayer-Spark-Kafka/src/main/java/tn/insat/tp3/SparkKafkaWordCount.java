@@ -24,12 +24,12 @@ class Record {
     private double high;
     private double count;
 
-    public Record(long timestamp, int id, double vwap, double high , double  low , double count) {
+    public Record(long timestamp, int id, double vwap, double high, double low, double count) {
         this.timestamp = timestamp;
         this.id = id;
         this.vwap = vwap;
-        this.high = high ;
-        this.low = low ;
+        this.high = high;
+        this.low = low;
         this.count = count;
     }
 
@@ -53,11 +53,11 @@ class Record {
         return id;
     }
 
-
     public double getVwap() {
         return vwap;
     }
 }
+
 public class SparkKafkaWordCount {
 
     private SparkKafkaWordCount() {
@@ -79,8 +79,8 @@ public class SparkKafkaWordCount {
             topicMap.put(topic, numThreads);
         }
 
-        JavaPairReceiverInputDStream<String, String> messages =
-                KafkaUtils.createStream(jssc, args[0], args[1], topicMap);
+        JavaPairReceiverInputDStream<String, String> messages = KafkaUtils.createStream(jssc, args[0], args[1],
+                topicMap);
 
         JavaDStream<String> lines = messages.map(Tuple2::_2);
 
@@ -88,7 +88,7 @@ public class SparkKafkaWordCount {
 
         JavaDStream<Record> records = individualLines.map(line -> {
             String[] word = line.split(",");
-            long timestamp = Long.parseLong(word[0].trim()) ; // Convert to milliseconds
+            long timestamp = Long.parseLong(word[0].trim()); // Convert to milliseconds
 
             int id = Integer.parseInt(word[1].trim());
             double count = Double.parseDouble(word[2].trim());
@@ -96,14 +96,14 @@ public class SparkKafkaWordCount {
             double low = Double.parseDouble(word[5].trim());
             double vwap = Double.parseDouble(word[8].trim());
 
-            return new Record(timestamp, id, vwap , high , low ,count);
+            return new Record(timestamp, id, vwap, high, low, count);
         });
 
         // Save data to MongoDB
         records.foreachRDD(rdd -> {
             rdd.foreachPartition(partitionOfRecords -> {
                 // MongoDB connection
-                String connectionString = "mongodb+srv://sborcheni:XHJJVDb8SrAOfmig@cluster0.ymh6fip.mongodb.net/";
+                String connectionString = "mongodb+srv://nguyentiendang0106_db_user:0GKgxwAK4KMFBSFZ@bdcrypto.xdbzddc.mongodb.net/";
                 MongoClientSettings settings = MongoClientSettings.builder()
                         .applyConnectionString(new ConnectionString(connectionString))
                         .build();
@@ -134,4 +134,3 @@ public class SparkKafkaWordCount {
         jssc.awaitTermination();
     }
 }
-

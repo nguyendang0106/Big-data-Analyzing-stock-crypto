@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB using Mongoose
-const url = 'mongodb+srv://sborcheni:XHJJVDb8SrAOfmig@cluster0.ymh6fip.mongodb.net/BigData?retryWrites=true&w=majority';
+const url = 'mongodb+srv://nguyentiendang0106_db_user:0GKgxwAK4KMFBSFZ@bdcrypto.xdbzddc.mongodb.net/BDCrypto?retryWrites=true&w=majority';
 mongoose.connect(url)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('Error connecting to MongoDB:', err));
