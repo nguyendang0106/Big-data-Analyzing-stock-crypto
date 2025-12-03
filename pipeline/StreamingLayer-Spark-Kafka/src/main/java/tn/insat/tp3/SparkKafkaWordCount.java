@@ -103,7 +103,7 @@ public class SparkKafkaWordCount {
         records.foreachRDD(rdd -> {
             rdd.foreachPartition(partitionOfRecords -> {
                 // MongoDB connection
-                String connectionString = "mongodb+srv://nguyentiendang0106_db_user:0GKgxwAK4KMFBSFZ@bdcrypto.xdbzddc.mongodb.net/";
+                String connectionString = "mongodb+srv://nguyentiendang0106_db_user:<db_password>@bdcrypto.xdbzddc.mongodb.net/";
                 MongoClientSettings settings = MongoClientSettings.builder()
                         .applyConnectionString(new ConnectionString(connectionString))
                         .build();
