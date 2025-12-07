@@ -11,7 +11,7 @@ Hệ thống thu thập, lưu trữ và phân tích dữ liệu chứng khoán, 
 - **Nguồn dữ liệu:**
 
 - API sàn giao dịch chứng khoán
-- Web scraping từ các trang tài chính
+- Web scraping từ các trang tài chính, tiền điện tử
 - Dữ liệu streaming real-time
 - Dữ liệu lịch sử từ các nhà cung cấp
 
