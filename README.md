@@ -2,7 +2,7 @@
 
 ## Tổng Quan
 
-Hệ thống thu thập, lưu trữ và phân tích dữ liệu chứng khoán theo thời gian thực, được xây dựng trên nền tảng Big Data để xử lý khối lượng lớn dữ liệu giao dịch chứng khoán và cung cấp các phân tích, báo cáo có giá trị.
+Hệ thống thu thập, lưu trữ và phân tích dữ liệu chứng khoán, crypto theo thời gian thực, được xây dựng trên nền tảng Big Data để xử lý khối lượng lớn dữ liệu giao dịch chứng khoán và cung cấp các phân tích, báo cáo có giá trị.
 
 ## Kiến Trúc Hệ Thống
 
@@ -11,7 +11,7 @@ Hệ thống thu thập, lưu trữ và phân tích dữ liệu chứng khoán t
 - **Nguồn dữ liệu:**
 
 - API sàn giao dịch chứng khoán
-- Web scraping từ các trang tài chính
+- Web scraping từ các trang tài chính, tiền điện tử
 - Dữ liệu streaming real-time
 - Dữ liệu lịch sử từ các nhà cung cấp
 
