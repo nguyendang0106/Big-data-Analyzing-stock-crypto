@@ -21,14 +21,14 @@
     spark-worker-driver:
       image: apache/spark:3.5.0
       container_name: spark-worker-driver
-      user: root  # <== Gán user có HOME hợp lệ để tránh lỗi Ivy
+      user: root  
       environment:
-        - GOOGLE_APPLICATION_CREDENTIALS=/opt/spark/google-key.json # <-- Trỏ trực tiếp đến file key đã mount
+        - GOOGLE_APPLICATION_CREDENTIALS=/opt/spark/google-key.json 
         - SPARK_MODE=worker
         - SPARK_MASTER=spark://spark-master:7077
         - SPARK_WORKER_CORES=2
         - SPARK_WORKER_MEMORY=2G
-        - HOME=/tmp  # <== Đảm bảo thư mục HOME hợp lệ để tránh lỗi spark-submit
+        - HOME=/tmp  
       networks:
         - spark-network
       volumes:
