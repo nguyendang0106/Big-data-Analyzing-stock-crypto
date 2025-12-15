@@ -9,3 +9,9 @@ env
 *.json
 *.csv
 *.log
+
+pipeline/Dashboard/
+pipeline/Dashboard-ReactApp/
+
+pipeline/StreamingLayer-Spark-Kafka/checkpoint/
+pipeline/StreamingLayer-Spark-Kafka/target/

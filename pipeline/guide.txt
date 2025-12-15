@@ -1,0 +1,43 @@
+batch-layer:
+
+start-dfs.cmd
+
+cd BatchLayer-Hadoop
+
+# Disable SAFE MODE
+hdfs dfsadmin -safemode leave
+
+# Delete old output (if it exists) so the job doesn't crash
+hdfs dfs -rm -r /user/output
+
+# Upload the input file
+hdfs dfs -mkdir -p /user/input
+hdfs dfs -put -f src/main/resources/input/file.txt /user/input/
+
+# Run the MapReduce
+hadoop jar target/crypto_map_reduce-1.0-SNAPSHOT.jar tn.insat.tp1.Crypto /user/input /user/output
+
+# Verify Output
+hdfs dfs -ls /user/output
+
+
+# To read result:
+hdfs dfs -cat /user/output/part-r-00000
+
+Stream layer:
+
+# Zookeeper
+cd C:\kafka\bin\windows
+zookeeper-server-start.bat ..\..\config\zookeeper.properties
+
+# Kafka
+cd C:\kafka\bin\windows
+kafka-server-start.bat ..\..\config\server.properties
+
+cd StreamingLayer-Spark-Kafka
+# spark-submit --packages org.apache.spark:spark-streaming-kafka-0-10_2.13:3.5.0 --class tn.insat.tp3.SparkKafkaWordCount --master local[2] target/stream-kafka-spark-1-jar-with-dependencies.jar localhost:2181 test-group crypto 1
+spark-submit `
+   --packages org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.0 `
+   --class tn.insat.tp3.SparkStructuredStreamingCrypto `
+   target\stream-kafka-spark-1-jar-with-dependencies.jar
+
