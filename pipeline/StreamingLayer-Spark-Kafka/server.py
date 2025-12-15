@@ -2,11 +2,13 @@ from fastapi import FastAPI, Query
 from pymongo import MongoClient
 from datetime import datetime
 from typing import List
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 # ==============================
 # CONFIG
 # ==============================
-MONGO_URI = "..."
+MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = "BigData"
 
 RAW_COLLECTION = "raw_trade"
