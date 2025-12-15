@@ -24,7 +24,24 @@ public class SparkStructuredStreamingCrypto {
     public static void main(String[] args) throws Exception {
 
         String KAFKA_TOPIC = "binance";
-        String mongoUri = "mongodb://localhost:27017";
+        // String mongoUri = "mongodb://localhost:27017";
+        // String mongoUri = System.getenv("MONGO_URI");
+        // String mongoDb = System.getenv("MONGO_DB");
+        // String mongoRawCollection = System.getenv("MONGO_RAW_COLLECTION");
+        // String mongoTumblingCollection = System.getenv("MONGO_TUMBLING_COLLECTION");
+        // String mongoSlidingCollection = System.getenv("MONGO_SLIDING_COLLECTION");
+
+        String mongoUri = "mongodb+srv://20224960:20224960@cluster0.egwmocl.mongodb.net/?appName=Cluster0";
+        String mongoDb = "BigData";
+        String mongoRawCollection = "raw_trade";
+        String mongoTumblingCollection = "agg_tumbling_1m";
+        String mongoSlidingCollection = "agg_sliding_30s";
+
+        if (mongoUri == null || mongoDb == null) {
+                throw new RuntimeException("MongoDB environment variables are not set");
+        }
+
+        testMongoConnection(mongoUri, mongoDb);
 
         SparkSession spark = SparkSession
                 .builder()
@@ -90,7 +107,7 @@ public class SparkStructuredStreamingCrypto {
         VoidFunction2<Dataset<Row>, Long> rawBatchWriter = (df, batchId) -> {
             try {
                 if (df == null || df.isEmpty()) return;
-                writeDatasetToMongoBatch(df, mongoUri, "BigData", "raw_trade");
+                writeDatasetToMongoBatch(df, mongoUri, mongoDb, mongoRawCollection);
             } catch (Exception e) {
                 System.err.println(" Error writing RAW batch: " + e.getMessage());
                 e.printStackTrace();
@@ -136,7 +153,7 @@ public class SparkStructuredStreamingCrypto {
         VoidFunction2<Dataset<Row>, Long> tumblingBatchWriter = (df, batchId) -> {
             try {
                 if (df == null || df.isEmpty()) return;
-                writeDatasetToMongoBatch(df, mongoUri, "BigData", "agg_tumbling_1m");
+                writeDatasetToMongoBatch(df, mongoUri, mongoDb, mongoTumblingCollection);
             } catch (Exception e) {
                 System.err.println(" Error writing TUMBLING batch: " + e.getMessage());
                 e.printStackTrace();
@@ -182,7 +199,7 @@ public class SparkStructuredStreamingCrypto {
         VoidFunction2<Dataset<Row>, Long> slidingBatchWriter = (df, batchId) -> {
             try {
                 if (df == null || df.isEmpty()) return;
-                writeDatasetToMongoBatch(df, mongoUri, "BigData", "agg_sliding_30s");
+                writeDatasetToMongoBatch(df, mongoUri, mongoDb, mongoSlidingCollection);
             } catch (Exception e) {
                 System.err.println(" Error writing SLIDING batch: " + e.getMessage());
                 e.printStackTrace();
@@ -235,4 +252,20 @@ public class SparkStructuredStreamingCrypto {
             if (client != null) client.close();
         }
     }
+
+    private static void testMongoConnection(String mongoUri, String dbName) {
+        try (MongoClient client = MongoClients.create(mongoUri)) {
+
+                Document ping = new Document("ping", 1);
+                client.getDatabase(dbName).runCommand(ping);
+
+                System.out.println("✅ Successfully connected to MongoDB Atlas");
+
+        } catch (Exception e) {
+                System.err.println("❌ Failed to connect to MongoDB Atlas");
+                e.printStackTrace();
+                System.exit(1);
+        }
+        }
+
 }

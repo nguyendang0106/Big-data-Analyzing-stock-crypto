@@ -41,3 +41,6 @@ spark-submit `
    --class tn.insat.tp3.SparkStructuredStreamingCrypto `
    target\stream-kafka-spark-1-jar-with-dependencies.jar
 
+conda activate big_data
+cd .\pipeline\StreamingLayer-Spark-Kafka\
+python binance_producer.py
