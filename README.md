@@ -358,3 +358,59 @@ Project này được phân phối dưới giấy phép MIT License. Xem file [L
 ---
 
 **Lưu ý:** Đây là hệ thống giáo dục và nghiên cứu. Không sử dụng cho mục đích giao dịch thực tế mà không có sự tư vấn từ chuyên gia tài chính.
+
+```
+Big-data-Analyzing-stock-crypto
+├─ airflow
+│  ├─ 1.py
+│  ├─ dags
+│  │  ├─ etl_binance_to_gcs.py
+│  │  ├─ etl_dag.py
+│  │  └─ __pycache__
+│  │     ├─ etl_binance_to_gcs.cpython-312.pyc
+│  │     └─ etl_dag.cpython-312.pyc
+│  ├─ docker-compose.yaml
+│  ├─ Dockerfile
+│  ├─ Dockerfile.etl.gcs
+│  └─ requirements_etl.txt
+├─ pipeline
+│  ├─ guide.txt
+│  └─ server
+│     └─ server.js
+├─ README.md
+├─ requirements.txt
+├─ spark
+│  ├─ code
+│  │  ├─ batch_feature_etl.py
+│  │  └─ write_to_big_query.py
+│  ├─ docker-compose.yaml
+│  ├─ jars
+│  │  ├─ gcs-connector-hadoop3-latest.jar
+│  │  └─ spark-bigquery-with-dependencies_2.12-0.36.1.jar
+│  ├─ requirements.txt
+│  └─ start_date.txt
+└─ StreamingLayer-Spark-Kafka
+   ├─ .idea
+   │  ├─ compiler.xml
+   │  ├─ encodings.xml
+   │  ├─ jarRepositories.xml
+   │  └─ misc.xml
+   ├─ pom.xml
+   ├─ producer
+   │  └─ binance_producer.py
+   ├─ server.py
+   ├─ src
+   │  └─ main
+   │     └─ java
+   │        ├─ spark
+   │        │  └─ kafka
+   │        │     └─ Main.java
+   │        └─ tn
+   │           └─ insat
+   │              └─ tp3
+   │                 ├─ MongoWriter.java
+   │                 └─ SparkStructuredStreamingCrypto.java
+   └─ __pycache__
+      └─ server.cpython-314.pyc
+
+```

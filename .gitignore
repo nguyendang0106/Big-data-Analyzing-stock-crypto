@@ -10,8 +10,8 @@ env
 *.csv
 *.log
 
-pipeline/Dashboard/
-pipeline/Dashboard-ReactApp/
+StreamingLayer-Spark-Kafka/checkpoint/
+StreamingLayer-Spark-Kafka/target/
 
-pipeline/StreamingLayer-Spark-Kafka/checkpoint/
-pipeline/StreamingLayer-Spark-Kafka/target/
+airflow/logs/
+airflow-chart/

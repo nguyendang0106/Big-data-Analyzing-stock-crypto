@@ -1,3 +1,4 @@
-D:\HUST_file\@IT4045\Big-data-Analyzing-stock-crypto\pipeline\StreamingLayer-Spark-Kafka\src\main\java\tn\insat\tp3\SparkStructuredStreamingCrypto.java
-D:\HUST_file\@IT4045\Big-data-Analyzing-stock-crypto\pipeline\StreamingLayer-Spark-Kafka\src\main\java\tn\insat\tp3\MongoWriter.java
-D:\HUST_file\@IT4045\Big-data-Analyzing-stock-crypto\pipeline\StreamingLayer-Spark-Kafka\src\main\java\spark\kafka\Main.java
+D:\HUST_file\@IT4045\Big-data-Analyzing-stock-crypto\StreamingLayer-Spark-Kafka\src\main\java\spark\kafka\Main.java
+D:\HUST_file\@IT4045\Big-data-Analyzing-stock-crypto\StreamingLayer-Spark-Kafka\src\main\java\tn\insat\tp3\MongoWriter.java
+D:\HUST_file\@IT4045\Big-data-Analyzing-stock-crypto\StreamingLayer-Spark-Kafka\src\main\java\tn\insat\tp3\TestGCSConnection.java
+D:\HUST_file\@IT4045\Big-data-Analyzing-stock-crypto\StreamingLayer-Spark-Kafka\src\main\java\tn\insat\tp3\SparkStructuredStreamingCrypto.java

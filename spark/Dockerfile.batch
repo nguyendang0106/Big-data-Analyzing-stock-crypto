@@ -1,0 +1,20 @@
+FROM apache/spark:3.5.0-python3
+USER root
+WORKDIR /opt/spark
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY jars/gcs-connector-hadoop3-latest.jar /opt/spark/jars/
+COPY jars/spark-bigquery-with-dependencies_2.12-0.36.1.jar /opt/spark/jars/
+COPY code/write_to_big_query.py /opt/spark/work-dir/
+COPY start_date.txt /opt/spark/
+CMD ["/opt/spark/bin/spark-submit", \
+     "--master", "k8s://https://kubernetes.default.svc:443", \
+     "--deploy-mode", "client", \
+     "--name", "Spark-Batch-ETL", \
+     "--conf", "spark.kubernetes.container.image=docker.io/helloimgnud/spark-batch:latest", \
+     "--conf", "spark.kubernetes.namespace=crypto-pipeline", \
+     "--conf", "spark.executor.instances=3", \
+     "--conf", "spark.executor.memory=2g", \
+     "--conf", "spark.executor.cores=2", \
+     "--jars", "/opt/spark/jars/gcs-connector-hadoop3-latest.jar,/opt/spark/jars/spark-bigquery-with-dependencies_2.12-0.36.1.jar", \
+     "/opt/spark/work-dir/write_to_big_query.py"]

@@ -1,0 +1,64 @@
+wsl -d Ubuntu
+chmod +x deploy.sh
+./deploy.sh
+
+kubectl config set-cluster docker-desktop \
+  --server=https://127.0.0.1:6443
+
+sudo nano /etc/resolv.conf
+nameserver 8.8.8.8
+nameserver 1.1.1.1
+
+
+spark-submit `
+   --class tn.insat.tp3.SparkCryptoStructuredStreaming `
+   --master "local[*]" `
+   --jars "D:\HUST_file\@IT4045\Big-data-Analyzing-stock-crypto\StreamingLayer-Spark-Kafka\gcs-connector-hadoop3-2.2.18-shaded.jar" `     
+   target/stream-kafka-spark-1-jar-with-dependencies.jar
+
+batch-layer:
+
+start-dfs.cmd
+
+cd BatchLayer-Hadoop
+
+# Disable SAFE MODE
+hdfs dfsadmin -safemode leave
+
+# Delete old output (if it exists) so the job doesn't crash
+hdfs dfs -rm -r /user/output
+
+# Upload the input file
+hdfs dfs -mkdir -p /user/input
+hdfs dfs -put -f src/main/resources/input/file.txt /user/input/
+
+# Run the MapReduce
+hadoop jar target/crypto_map_reduce-1.0-SNAPSHOT.jar tn.insat.tp1.Crypto /user/input /user/output
+
+# Verify Output
+hdfs dfs -ls /user/output
+
+
+# To read result:
+hdfs dfs -cat /user/output/part-r-00000
+
+Stream layer:
+
+# Zookeeper
+cd C:\kafka\bin\windows
+zookeeper-server-start.bat ..\..\config\zookeeper.properties
+
+# Kafka
+cd C:\kafka\bin\windows
+kafka-server-start.bat ..\..\config\server.properties
+
+cd StreamingLayer-Spark-Kafka
+mvn clean package -Dskiptests
+spark-submit `
+   --class tn.insat.tp3.SparkStructuredStreamingCrypto `
+   --master "local[*]" `
+   --jars "libs\gcs-connector-hadoop3-2.2.18-shaded.jar" `
+   --packages "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.0,org.mongodb.spark:mongo-spark-connector_2.13:10.2.1" `
+   target/stream-kafka-spark-1-jar-with-dependencies.jar
+
+

@@ -1,0 +1,17 @@
+# Stage 1: Build the JAR using a Maven image with full JDK
+FROM maven:3.9-eclipse-temurin-11 AS builder
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+# Build the package (skipping tests to speed up)
+RUN mvn clean package -DskipTests
+
+# Stage 2: Create the runtime image
+FROM apache/spark:3.5.0
+USER root
+WORKDIR /app
+
+# Copy the compiled JAR from the builder stage to the final image
+COPY --from=builder /app/target/stream-kafka-spark-1-jar-with-dependencies.jar /app/target/stream-kafka-spark-1-jar-with-dependencies.jar
+
+CMD ["/opt/spark/bin/spark-submit",      "--class", "tn.insat.tp3.SparkStructuredStreamingCrypto",      "--master", "k8s://https://kubernetes.default.svc:443",      "--deploy-mode", "client",      "--conf", "spark.kubernetes.container.image=docker.io/helloimgnud/spark-streaming:latest",      "--conf", "spark.kubernetes.namespace=crypto-pipeline",      "/app/target/stream-kafka-spark-1-jar-with-dependencies.jar"]
