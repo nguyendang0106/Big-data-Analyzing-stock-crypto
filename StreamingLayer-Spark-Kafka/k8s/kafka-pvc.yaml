@@ -10,3 +10,18 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: standard
+
+---
+# Mới thêm: PVC cho Zookeeper để lưu lại trạng thái Cluster ID
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zookeeper-pvc
+  namespace: crypto-streaming
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi  # Zookeeper chỉ lưu metadata nên không cần quá lớn
+  storageClassName: standard

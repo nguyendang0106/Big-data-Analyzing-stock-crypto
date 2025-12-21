@@ -1,8 +1,8 @@
+# PersistentVolume (cluster-scoped - NO namespace!)
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: grafana-pv
-  namespace: crypto-streaming
   labels:
     type: local
 spec:
@@ -12,10 +12,11 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/tmp/grafana-data"
+    path: "/mnt/data/grafana"
+    type: DirectoryOrCreate
 
 ---
-# 2. Tạo Persistent Volume Claim (Vé yêu cầu sử dụng storage)
+# PersistentVolumeClaim (namespace-scoped)
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

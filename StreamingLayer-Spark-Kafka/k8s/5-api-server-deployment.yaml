@@ -1,31 +1,87 @@
----
-# FastAPI Service
-apiVersion: v1
-kind: Service
-metadata:
-  name: crypto-api-service
-  namespace: crypto-streaming
-spec:
-  type: NodePort
-  ports:
-    - port: 8000
-      targetPort: 8000
-      nodePort: 30800
-  selector:
-    app: crypto-api
+# ---
+# # FastAPI Service
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: crypto-api-service
+#   namespace: crypto-streaming
+# spec:
+#   type: NodePort
+#   ports:
+#     - port: 8000
+#       targetPort: 8000
+#       nodePort: 30800
+#   selector:
+#     app: crypto-api
 
----
-# FastAPI Deployment
+# ---
+# # FastAPI Deployment
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: crypto-api
+#   namespace: crypto-streaming
+# spec:
+#   replicas: 2  # 2 replicas for high availability
+#   selector:
+#     matchLabels:
+#       app: crypto-api
+#   template:
+#     metadata:
+#       labels:
+#         app: crypto-api
+#     spec:
+#       containers:
+#       - name: api-server
+#         image: crypto-api:latest
+#         imagePullPolicy: Never  # Use local image in Minikube
+#         ports:
+#         - containerPort: 8000
+#         env:
+#         - name: MONGO_URI
+#           valueFrom:
+#             secretKeyRef:
+#               name: crypto-secrets
+#               key: MONGO_URI
+#         - name: MONGO_DB
+#           valueFrom:
+#             configMapKeyRef:
+#               name: crypto-config
+#               key: MONGO_DB
+#         resources:
+#           requests:
+#             memory: "256Mi"
+#             cpu: "200m"
+#           limits:
+#             memory: "512Mi"
+#             cpu: "500m"
+#         livenessProbe:
+#           httpGet:
+#             path: /
+#             port: 8000
+#           initialDelaySeconds: 30
+#           periodSeconds: 10
+#         readinessProbe:
+#           httpGet:
+#             path: /
+#             port: 8000
+#           initialDelaySeconds: 10
+#           periodSeconds: 5
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: crypto-api
   namespace: crypto-streaming
 spec:
-  replicas: 2  # 2 replicas for high availability
+  replicas: 2
   selector:
     matchLabels:
       app: crypto-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -34,36 +90,93 @@ spec:
       containers:
       - name: api-server
         image: crypto-api:latest
-        imagePullPolicy: Never  # Use local image in Minikube
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
+        
+        # ====================================================
+        # CẤU HÌNH BIẾN MÔI TRƯỜNG TỪ CONFIGMAP & SECRET
+        # ====================================================
         env:
+        # 1. Mongo Config
         - name: MONGO_URI
           valueFrom:
             secretKeyRef:
-              name: crypto-secrets
-              key: MONGO_URI
+              name: crypto-secrets      # Tên secret bạn tạo
+              key: MONGO_URI            # Key bạn đã set
         - name: MONGO_DB
           valueFrom:
             configMapKeyRef:
-              name: crypto-config
+              name: crypto-config       # Tên configmap bạn tạo
               key: MONGO_DB
+        - name: MONGO_TUMBLING_COLLECTION
+          valueFrom:
+            configMapKeyRef:
+              name: crypto-config
+              key: MONGO_TUMBLING_COLLECTION
+        - name: MONGO_SLIDING_COLLECTION
+          valueFrom:
+            configMapKeyRef:
+              name: crypto-config
+              key: MONGO_SLIDING_COLLECTION
+
+        # 2. GCS Config
+        - name: GCS_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: crypto-config
+              key: GCS_BUCKET
+        - name: GCS_RAW_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: crypto-config
+              key: GCS_RAW_PATH
+        
+        # 3. GCS Auth Path (Trỏ tới file được mount bên dưới)
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/etc/gcp/gcs_key.json"  # Đây là đường dẫn file trong container
+
+        # ====================================================
+        # MOUNT SECRET THÀNH FILE
+        # ====================================================
+        volumeMounts:
+        - name: gcs-key-volume
+          mountPath: "/etc/gcp"
+          readOnly: true
+
         resources:
           requests:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "200m"
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "1Gi"
+            cpu: "1000m"
+            
         livenessProbe:
           httpGet:
             path: /
             port: 8000
           initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8000
-          initialDelaySeconds: 10
-          periodSeconds: 5
+          periodSeconds: 15
+
+      volumes:
+      - name: gcs-key-volume
+        secret:
+          secretName: crypto-secrets   # Lấy từ secret bạn đã tạo
+          items:
+          - key: GCS_KEY_JSON          # Key chứa nội dung file json
+            path: gcs_key.json         # Tên file muốn tạo ra trong /etc/gcp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crypto-api            # Tên này phải trùng với lệnh port-forward của bạn
+  namespace: crypto-streaming
+spec:
+  selector:
+    app: crypto-api           # Phải khớp với label trong Deployment ở trên
+  ports:
+    - protocol: TCP
+      port: 8000              # Port của Service (bên ngoài gọi vào)
+      targetPort: 8000        # Port của Container (code Python mở ra)
+  type: ClusterIP
