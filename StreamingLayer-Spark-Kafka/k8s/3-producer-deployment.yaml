@@ -1,0 +1,51 @@
+---
+# Binance Producer Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: binance-producer
+  namespace: crypto-streaming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: binance-producer
+  template:
+    metadata:
+      labels:
+        app: binance-producer
+    spec:
+      containers:
+      - name: producer
+        image: crypto-producer:latest
+        imagePullPolicy: Never  # Use local image in Minikube
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+            configMapKeyRef:
+              name: crypto-config
+              key: KAFKA_BOOTSTRAP_SERVERS
+        - name: TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: crypto-config
+              key: KAFKA_TOPIC
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import socket; socket.create_connection(('kafka-service', 9092), timeout=5)"
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          failureThreshold: 3
+      restartPolicy: Always

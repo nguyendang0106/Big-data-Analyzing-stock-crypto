@@ -15,3 +15,5 @@ StreamingLayer-Spark-Kafka/target/
 
 airflow/logs/
 airflow-chart/
+
+guide.txt
