@@ -29,48 +29,6 @@ spec:
 
 ---
 # Zookeeper Deployment
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: zookeeper
-#   namespace: crypto-streaming
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: zookeeper
-#   template:
-#     metadata:
-#       labels:
-#         app: zookeeper
-#     spec:
-#       containers:
-#       - name: zookeeper
-#         image: confluentinc/cp-zookeeper:7.5.0
-#         ports:
-#           - containerPort: 2181
-#         env:
-#           - name: ZOOKEEPER_CLIENT_PORT
-#             value: "2181"
-#           - name: ZOOKEEPER_TICK_TIME
-#             value: "2000"
-#         resources:
-#           requests:
-#             memory: "512Mi"
-#             cpu: "250m"
-#           limits:
-#             memory: "1Gi"
-#             cpu: "500m"
-#         readinessProbe:
-#           tcpSocket:
-#             port: 2181
-#           initialDelaySeconds: 10
-#           periodSeconds: 5
-#         livenessProbe:
-#           tcpSocket:
-#             port: 2181
-#           initialDelaySeconds: 30
-#           periodSeconds: 10
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -154,8 +112,8 @@ spec:
           - name: KAFKA_LISTENERS
             value: "PLAINTEXT://0.0.0.0:9092"
           - name: KAFKA_ADVERTISED_LISTENERS
-            # value: "PLAINTEXT://kafka-service:9092"
-            value: "PLAINTEXT://kafka-service.crypto-streaming.svc.cluster.local:9092"
+            value: "PLAINTEXT://kafka-service:9092"
+            # value: "PLAINTEXT://kafka-service.crypto-streaming.svc.cluster.local:9092"
           - name: KAFKA_INTER_BROKER_LISTENER_NAME
             value: "PLAINTEXT"
           - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR

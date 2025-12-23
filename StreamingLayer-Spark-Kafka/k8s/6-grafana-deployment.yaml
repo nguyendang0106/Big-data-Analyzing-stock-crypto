@@ -87,3 +87,17 @@ spec:
         - name: grafana-storage
           persistentVolumeClaim:
             claimName: grafana-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-service       # Tên này phải khớp với lệnh port-forward của bạn
+  namespace: crypto-streaming
+spec:
+  selector:
+    app: grafana              # Phải khớp với label trong Deployment (app: grafana)
+  ports:
+    - protocol: TCP
+      port: 3000              # Port của Service
+      targetPort: 3000        # Port của Container Grafana
+  type: ClusterIP

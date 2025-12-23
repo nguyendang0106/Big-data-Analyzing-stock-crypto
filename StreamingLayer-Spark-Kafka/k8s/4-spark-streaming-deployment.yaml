@@ -62,8 +62,6 @@ spec:
           - spark.executor.memory=2g
           - --conf
           - spark.driver.memory=2g
-          - --conf
-          - spark.sql.streaming.checkpointLocation=/checkpoint
           - /opt/spark-app/app.jar
         env:
         - name: KAFKA_BOOTSTRAP_SERVERS
@@ -101,6 +99,11 @@ spec:
             configMapKeyRef:
               name: crypto-config
               key: GCS_RAW_PATH
+        - name: KAFKA_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: crypto-config
+              key: KAFKA_TOPIC
         - name: GCS_KEY_PATH
           value: "/secrets/gcs/key.json"
         - name: GOOGLE_APPLICATION_CREDENTIALS
@@ -120,8 +123,7 @@ spec:
             cpu: "2000m"
       volumes:
       - name: checkpoint
-        persistentVolumeClaim:
-          claimName: spark-checkpoint-pvc
+        emptyDir: {}
       - name: gcs-key
         secret:
           secretName: crypto-secrets

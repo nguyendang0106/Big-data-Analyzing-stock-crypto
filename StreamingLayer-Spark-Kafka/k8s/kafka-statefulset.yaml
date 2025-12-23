@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka
+  namespace: crypto-streaming
+spec:
+  serviceName: kafka-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: confluentinc/cp-kafka:7.7.0
+        ports:
+          - containerPort: 9092
+        env:
+          - name: KAFKA_BROKER_ID
+            value: "0"
+          - name: KAFKA_ZOOKEEPER_CONNECT
+            value: "zookeeper-service:2181"
+          - name: KAFKA_LISTENERS
+            value: "PLAINTEXT://0.0.0.0:9092"
+          - name: KAFKA_ADVERTISED_LISTENERS
+            # value: "PLAINTEXT://kafka-0.kafka-service.crypto-streaming.svc.cluster.local:9092"
+            value: "PLAINTEXT://kafka-service:9092"
+          - name: KAFKA_INTER_BROKER_LISTENER_NAME
+            value: "PLAINTEXT"
+          - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+            value: "1"
+          - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
+            value: "true"
+        volumeMounts:
+          - name: kafka-data
+            mountPath: /var/lib/kafka/data
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+  volumeClaimTemplates:
+  - metadata:
+      name: kafka-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-service
+  namespace: crypto-streaming
+spec:
+  clusterIP: None
+  selector:
+    app: kafka
+  ports:
+    - port: 9092
+      targetPort: 9092
