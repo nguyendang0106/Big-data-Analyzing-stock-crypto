@@ -1,4 +1,5 @@
 import os
+import sys
 import traceback
 from dotenv import load_dotenv
 from pyspark.sql import SparkSession
@@ -225,32 +226,69 @@ def run_spark_etl_from_gcs(execution_date):
     return success_on_day
 
 # --- CHU TRÌNH CHÍNH ---
-if __name__ == "__main__":
-    start_processing_date = read_start_date()
-    end_processing_date = date.today() - timedelta(days=1)
+# if __name__ == "__main__":
+#     start_processing_date = read_start_date()
+#     end_processing_date = date.today() - timedelta(days=1)
     
-    current_date = start_processing_date
+#     current_date = start_processing_date
+#     overall_success_flag = True
+
+#     while current_date <= end_processing_date:
+#         print(f"\n==================================================")
+#         print(f"Bắt đầu xử lý TẤT CẢ COIN cho ngày: {current_date.strftime('%Y-%m-%d')}")
+        
+#         try:
+#             if run_spark_etl_from_gcs(current_date):
+#                 write_next_start_date(current_date)
+#                 current_date += timedelta(days=1)
+#             else:
+#                 print(f"LỖI XỬ LÝ MỘT HOẶC NHIỀU COIN cho ngày {current_date.strftime('%Y-%m-%d')}. Dừng lại.")
+#                 overall_success_flag = False
+#                 break
+            
+#         except Exception as e:
+#             print(f"LỖI TOÀN BỘ CHU TRÌNH cho ngày {current_date.strftime('%Y-%m-%d')}. Dừng lại. Lỗi: {e}")
+#             overall_success_flag = False
+#             break
+            
+#     if overall_success_flag:
+#         print("\nHoàn tất xử lý tăng dần.")
+    
+#     spark.stop()
+
+if __name__ == "__main__":
+    # KIỂM TRA XEM CÓ THAM SỐ TỪ AIRFLOW TRUYỀN VÀO KHÔNG
+    if len(sys.argv) > 1:
+        airflow_date_str = sys.argv[1]
+        current_date = datetime.strptime(airflow_date_str, "%Y-%m-%d").date()
+        end_processing_date = current_date # Chỉ chạy duy nhất ngày Airflow yêu cầu
+        print(f"Nhận tham số ngày từ Airflow: {airflow_date_str}")
+    else:
+        # Nếu chạy thủ công (không có tham số), dùng logic file .txt cũ
+        current_date = read_start_date()
+        end_processing_date = date.today() - timedelta(days=1)
+        print(f"Không có tham số, đọc từ file txt: {current_date}")
+
     overall_success_flag = True
 
     while current_date <= end_processing_date:
         print(f"\n==================================================")
-        print(f"Bắt đầu xử lý TẤT CẢ COIN cho ngày: {current_date.strftime('%Y-%m-%d')}")
+        print(f"Bắt đầu xử lý cho ngày: {current_date.strftime('%Y-%m-%d')}")
         
         try:
             if run_spark_etl_from_gcs(current_date):
-                write_next_start_date(current_date)
+                # Nếu chạy thủ công thì mới ghi file, chạy K8s ghi cũng được nhưng sẽ mất khi Pod tắt
+                if len(sys.argv) == 1:
+                    write_next_start_date(current_date)
                 current_date += timedelta(days=1)
             else:
-                print(f"LỖI XỬ LÝ MỘT HOẶC NHIỀU COIN cho ngày {current_date.strftime('%Y-%m-%d')}. Dừng lại.")
                 overall_success_flag = False
                 break
-            
         except Exception as e:
-            print(f"LỖI TOÀN BỘ CHU TRÌNH cho ngày {current_date.strftime('%Y-%m-%d')}. Dừng lại. Lỗi: {e}")
             overall_success_flag = False
             break
             
     if overall_success_flag:
-        print("\nHoàn tất xử lý tăng dần.")
+        print("\nHoàn tất xử lý.")
     
     spark.stop()
