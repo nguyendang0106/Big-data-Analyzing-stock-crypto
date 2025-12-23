@@ -120,7 +120,7 @@ if __name__ == "__main__":
     else:
         date_str = (date.today() - timedelta(days=1)).strftime('%Y-%m-%d')
 
-    try:
+    try:    
         date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
         run_etl(date_obj)
     except ValueError:
