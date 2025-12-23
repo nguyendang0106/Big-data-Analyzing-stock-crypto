@@ -1,0 +1,56 @@
+images:
+  airflow:
+    repository: hoanganhbui2110/binance-airflow-etl
+    tag: "v1"
+    pullPolicy: IfNotPresent
+
+executor: "LocalExecutor"
+
+# PHẦN QUAN TRỌNG NHẤT: Ép định nghĩa lệnh chạy cho Webserver
+webserver:
+  enabled: true
+
+apiServer:
+  enabled: false
+
+postgresql:
+  enabled: true
+  image:
+    tag: "latest"
+  persistence:
+    enabled: true
+    size: 5Gi
+
+env:
+  - name: "AIRFLOW__CORE__LOAD_EXAMPLES"
+    value: "False"
+  - name: "GOOGLE_APPLICATION_CREDENTIALS"
+    value: "/opt/airflow/secrets/key.json"
+
+extraVolumes:
+  - name: google-cloud-key-vol
+    secret:
+      secretName: gcp-key-secret 
+
+extraVolumeMounts:
+  - name: google-cloud-key-vol
+    mountPath: /opt/airflow/secrets
+    readOnly: true
+
+
+# Cấu hình biến môi trường toàn cục
+env:
+  - name: "KUBERNETES_SERVICE_HOST"
+    value: "10.96.0.1"
+  - name: "KUBERNETES_SERVICE_PORT"
+    value: "443"
+  - name: "AIRFLOW__CORE__LOAD_EXAMPLES"
+    value: "False"
+
+# Đảm bảo RBAC được bật để tạo ServiceAccount có quyền
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+  name: "airflow-scheduler"
