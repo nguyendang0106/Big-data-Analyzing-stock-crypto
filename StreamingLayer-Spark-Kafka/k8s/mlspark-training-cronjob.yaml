@@ -19,7 +19,7 @@ spec:
                 - configMapRef:
                     name: mlspark-config
                 - secretRef:
-                    name: mlspark-secrets
+                    name: crypto-secrets
               env:
                 - name: GOOGLE_APPLICATION_CREDENTIALS
                   value: "/secrets/gcs/key.json"
@@ -39,7 +39,7 @@ spec:
           volumes:
             - name: gcs-key
               secret:
-                secretName: mlspark-secrets
+                secretName: crypto-secrets
                 items:
                   - key: GCS_KEY_JSON
                     path: key.json

@@ -1,3 +1,4 @@
+# Local training (bigquery -> model -> GCS)
 docker build -t mlspark:latest -f mlspark/docker/Dockerfile .
 
 docker run --rm -it `
@@ -25,5 +26,91 @@ docker run --rm -it `
   --max_days 30 `
   --symbols BTCUSDT
 
-
 gsutil cat gs://my-project-binance-data-lake/ml/models/gbt_direction/2025-12-24/metadata.json
+
+# Optional: local streaming test (Kafka localhost -> Mongo localhost)
+docker run --rm -it `
+  -e KAFKA_BOOTSTRAP_SERVERS=localhost:9092 `
+  -e KAFKA_TOPIC=binance `
+  -e MONGO_URI="mongodb://localhost:27017" `
+  -e MONGO_DB=BigData `
+  -e ML_TUMBLING_COLLECTION=ml_signals_tumbling `
+  -e ML_SLIDING_COLLECTION=ml_signals_sliding `
+  -e GCS_BUCKET=my-project-binance-data-lake `
+  -e MODEL_BASE_PATH=ml/models `
+  -e MODEL_NAME=gbt_direction `
+  -e GOOGLE_APPLICATION_CREDENTIALS=/secrets/gcs-key.json `
+  -v "C:\Users\Admin\Downloads\decoded-tribute-474915-u9-111f1343f6c0.json:/secrets/gcs-key.json:ro" `
+  mlspark:latest `
+  /opt/spark/bin/spark-submit `
+  --master local[2] `
+  /opt/mlspark/mlspark/streaming_inference_job.py
+
+# Clean cluster (optional, before redeploy)
+kubectl delete namespace crypto-streaming --ignore-not-found
+minikube delete -p minikube
+
+# Minikube + build artifacts (new session)
+minikube start --driver=docker --cpus=4 --memory=6144
+minikube docker-env | Invoke-Expression
+echo $env:DOCKER_HOST  # should show tcp://127.0.0.1:xxxxx
+
+# Build Maven app jar
+cd StreamingLayer-Spark-Kafka
+mvn clean package -DskipTests
+cd ..\
+
+
+# Build images (after docker-env)
+docker build -t crypto-spark-streaming:latest -f docker/spark-streaming/Dockerfile .
+docker build -t crypto-producer:latest -f docker/producer/Dockerfile .
+docker build -t crypto-api:latest -f docker/fastapi-server/Dockerfile .
+docker build -t mlspark:latest -f mlspark/docker/Dockerfile .
+
+# Verify images
+docker images | Select-String crypto
+
+# Namespace + secrets/config
+kubectl create namespace crypto-streaming
+
+kubectl create secret generic crypto-secrets `
+   --from-file=GCS_KEY_JSON="C:\Users\Admin\Downloads\decoded-tribute-474915-u9-111f1343f6c0.json" `
+   --from-literal=MONGO_URI="mongodb+srv://20224960:20224960@cluster0.egwmocl.mongodb.net/?appName=Cluster0" `
+   -n crypto-streaming
+
+kubectl create configmap crypto-config `
+   --from-literal=KAFKA_BOOTSTRAP_SERVERS="kafka-service:9092" `
+   --from-literal=KAFKA_TOPIC="binance" `
+   --from-literal=MONGO_DB="BigData" `
+   --from-literal=MONGO_TUMBLING_COLLECTION="agg_tumbling_1m" `
+   --from-literal=MONGO_SLIDING_COLLECTION="agg_sliding_30s" `
+   --from-literal=GCS_BUCKET="crypto-streaming-data" `
+   --from-literal=GCS_RAW_PATH="raw-trades" `
+   -n crypto-streaming
+
+# Deploy base Kafka + producer + API + Grafana
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/kafka-pvc.yaml -n crypto-streaming
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/grafana-storage.yaml -n crypto-streaming
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/2-kafka-deployment.yaml -n crypto-streaming
+
+kubectl wait --for=condition=ready pod -l app=zookeeper -n crypto-streaming --timeout=120s
+kubectl wait --for=condition=ready pod -l app=kafka -n crypto-streaming --timeout=180s
+
+$kafkaPod = kubectl get pod -l app=kafka -n crypto-streaming -o jsonpath="{.items[0].metadata.name}"
+kubectl exec $kafkaPod -n crypto-streaming -- kafka-topics --create --topic binance --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --if-not-exists
+
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/3-producer-deployment.yaml -n crypto-streaming
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/4-spark-streaming-deployment.yaml -n crypto-streaming
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/5-api-server-deployment.yaml -n crypto-streaming
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/6-grafana-deployment.yaml -n crypto-streaming
+
+Start-Sleep -Seconds 30
+kubectl get pods -n crypto-streaming
+
+# Deploy ML Spark (config + streaming inference + training cron)
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/mlspark-config.yaml
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/mlspark-streaming-deployment.yaml
+kubectl apply -f StreamingLayer-Spark-Kafka/k8s/mlspark-training-cronjob.yaml
+kubectl wait --for=condition=ready pod -l app=mlspark-streaming -n crypto-streaming --timeout=180s
+
+kubectl logs -f deploy/mlspark-streaming -n crypto-streaming

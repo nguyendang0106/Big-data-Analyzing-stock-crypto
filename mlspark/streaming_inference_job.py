@@ -7,6 +7,7 @@ Streaming inference:
 - Write to Mongo collections ml_signals_tumbling and ml_signals_sliding
 """
 import json
+import os
 import sys
 from collections import defaultdict, deque
 from datetime import datetime, timedelta
@@ -144,7 +145,6 @@ def build_trades_df(spark, cfg):
             StructField("e", StringType()),
             StructField("E", LongType()),
             StructField("s", StringType()),
-            StructField("t", LongType()),
             StructField("p", StringType()),
             StructField("q", StringType()),
             StructField("T", LongType()),
@@ -164,14 +164,20 @@ def build_trades_df(spark, cfg):
     parsed = (
         kafka_df.selectExpr("CAST(value AS STRING) AS json")
         .select(F.from_json("json", root).alias("r"))
-        .select("r.data.*")
+        # Explicitly alias fields to avoid case-insensitive collisions (t vs T)
+        .selectExpr(
+            "r.data.s as symbol_raw",
+            "r.data.p as price_raw",
+            "r.data.q as quantity_raw",
+            "r.data.T as trade_ts"
+        )
     )
     trades = (
         parsed.select(
-            F.col("s").alias("symbol"),
-            F.col("p").cast("double").alias("price"),
-            F.col("q").cast("double").alias("quantity"),
-            (F.col("T") / F.lit(1000)).cast("timestamp").alias("timestamp"),
+            F.col("symbol_raw").alias("symbol"),
+            F.col("price_raw").cast("double").alias("price"),
+            F.col("quantity_raw").cast("double").alias("quantity"),
+            (F.col("trade_ts") / F.lit(1000)).cast("timestamp").alias("timestamp"),
         )
         .withWatermark("timestamp", "5 seconds")
     )
