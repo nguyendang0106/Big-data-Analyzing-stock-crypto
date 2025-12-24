@@ -311,6 +311,13 @@ kubectl apply -f k8s/
 helm install stock-system ./helm-chart
 ```
 
+## ML Spark add-on
+
+- Build image: `docker build -t mlspark:latest -f mlspark/docker/Dockerfile .`
+- Apply config/secret: `kubectl apply -f StreamingLayer-Spark-Kafka/k8s/mlspark-config.yaml`
+- Deploy training cronjob: `kubectl apply -f StreamingLayer-Spark-Kafka/k8s/mlspark-training-cronjob.yaml`
+- Deploy streaming inference: `kubectl apply -f StreamingLayer-Spark-Kafka/k8s/mlspark-streaming-deployment.yaml`
+- Verify: model artifacts in `gs://<bucket>/ml/models/<model>/<date>/sparkml`; Mongo collections `ml_signals_tumbling` / `ml_signals_sliding` contain recent docs (e.g., `db.ml_signals_sliding.find({symbol:"BTCUSDT"}).sort({end_time:-1}).limit(10)`)
 ## Roadmap
 
 - [ ] Tích hợp thêm nguồn dữ liệu

@@ -1,0 +1,65 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mlspark-checkpoint-pvc
+  namespace: crypto-streaming
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlspark-streaming
+  namespace: crypto-streaming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlspark-streaming
+  template:
+    metadata:
+      labels:
+        app: mlspark-streaming
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: mlspark-streaming
+          image: mlspark:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: mlspark-config
+            - secretRef:
+                name: mlspark-secrets
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: "/secrets/gcs/key.json"
+          volumeMounts:
+            - name: checkpoint
+              mountPath: /checkpoint-ml
+            - name: gcs-key
+              mountPath: /secrets/gcs
+              readOnly: true
+          command:
+            - /opt/spark/bin/spark-submit
+            - --packages
+            - org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,com.google.cloud.bigdataoss:gcs-connector:hadoop3-2.2.18
+            - --conf
+            - spark.jars.ivy=/tmp/.ivy2
+            - /opt/mlspark/mlspark/streaming_inference_job.py
+      volumes:
+        - name: checkpoint
+          persistentVolumeClaim:
+            claimName: mlspark-checkpoint-pvc
+        - name: gcs-key
+          secret:
+            secretName: mlspark-secrets
+            items:
+              - key: GCS_KEY_JSON
+                path: key.json

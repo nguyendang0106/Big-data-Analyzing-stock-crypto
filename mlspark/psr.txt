@@ -1,0 +1,25 @@
+docker build -t mlspark:latest -f mlspark/docker/Dockerfile .
+
+docker run --rm -it `
+  -e BQ_PROJECT=decoded-tribute-474915-u9 `
+  -e BQ_DATASET=crypto_data `
+  -e BQ_TABLE=binance_klines `
+  -e GCS_BUCKET=my-project-binance-data-lake `
+  -e GOOGLE_APPLICATION_CREDENTIALS=/secrets/gcs-key.json `
+  -v C:\Users\Admin\Downloads\decoded-tribute-474915-u9-111f1343f6c0.json:/secrets/gcs-key.json:ro `
+  mlspark:latest `
+  /opt/spark/bin/spark-submit `
+  --master local[*] `
+  --driver-memory 4g `
+  --executor-memory 4g `
+  --conf spark.executor.instances=1 `
+  --conf spark.executor.cores=2 `
+  --conf spark.sql.shuffle.partitions=50 `
+  --conf spark.default.parallelism=50 `
+  --conf spark.sql.files.maxPartitionBytes=64m `
+  --conf spark.jars.ivy=/tmp/.ivy2 `
+  --packages com.google.cloud.spark:spark-bigquery-with-dependencies_2.12:0.36.1,com.google.cloud.bigdataoss:gcs-connector:hadoop3-2.2.18 `
+  /opt/mlspark/mlspark/training_job.py `
+  --table decoded-tribute-474915-u9.crypto_data.binance_klines `
+  --max_days 7 `
+  --symbols BTCUSDT,ETHUSDT

@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mlspark-training
+  namespace: crypto-streaming
+spec:
+  schedule: "30 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: default
+          containers:
+            - name: mlspark-training
+              image: mlspark:latest
+              imagePullPolicy: IfNotPresent
+              envFrom:
+                - configMapRef:
+                    name: mlspark-config
+                - secretRef:
+                    name: mlspark-secrets
+              env:
+                - name: GOOGLE_APPLICATION_CREDENTIALS
+                  value: "/secrets/gcs/key.json"
+              volumeMounts:
+                - name: gcs-key
+                  mountPath: /secrets/gcs
+                  readOnly: true
+              command:
+                - /opt/spark/bin/spark-submit
+                - --packages
+                - com.google.cloud.spark:spark-bigquery-with-dependencies_2.12:0.36.1,com.google.cloud.bigdataoss:gcs-connector:hadoop3-2.2.18
+                - --conf
+                - spark.jars.ivy=/tmp/.ivy2
+                - /opt/mlspark/mlspark/training_job.py
+                - --table
+                - $(BQ_PROJECT).$(BQ_DATASET).$(BQ_TABLE)
+          volumes:
+            - name: gcs-key
+              secret:
+                secretName: mlspark-secrets
+                items:
+                  - key: GCS_KEY_JSON
+                    path: key.json

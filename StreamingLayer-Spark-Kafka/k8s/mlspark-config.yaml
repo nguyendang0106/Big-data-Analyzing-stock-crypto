@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mlspark-config
+  namespace: crypto-streaming
+data:
+  BQ_PROJECT: "decoded-tribute-474915-u9"
+  BQ_DATASET: "crypto_data"
+  BQ_TABLE: "binance_klines"
+  GCS_BUCKET: "my-project-binance-data-lake"
+  MODEL_BASE_PATH: "ml/models"
+  MODEL_NAME: "gbt_direction"
+  FEATURE_VERSION: "v1"
+  VALIDATION_DAYS: "7"
+  SEED: "1234"
+  KAFKA_BOOTSTRAP_SERVERS: "kafka-service.crypto-streaming.svc.cluster.local:9092"
+  KAFKA_TOPIC: "binance"
+  MONGO_DB: "BigData"
+  ML_TUMBLING_COLLECTION: "ml_signals_tumbling"
+  ML_SLIDING_COLLECTION: "ml_signals_sliding"
+  CHECKPOINT_PATH: "/checkpoint-ml"
+  MODEL_REFRESH_MINUTES: "15"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mlspark-secrets
+  namespace: crypto-streaming
+type: Opaque
+stringData:
+  MONGO_URI: ""        # fill in
+  GCS_KEY_JSON: ""     # optional: base64 JSON key if not using workload identity
