@@ -7,6 +7,7 @@ Streaming inference:
 - Write to Mongo collections ml_signals_tumbling and ml_signals_sliding
 """
 import json
+import os
 import sys
 from collections import defaultdict, deque
 from datetime import datetime, timedelta
@@ -78,7 +79,7 @@ def build_feature_df(spark, new_rows: List[dict]):
     df = spark.createDataFrame(data, schema=schema)
     df = df.withColumn("event_time", F.col("end_time"))
     df = add_bar_features(df)
-    df = forward_fill(df, feature_columns())
+    df = forward_fill(df, feature_columns(), gap_minutes=5)
     newest_times = {r["end_time"] for r in new_rows}
     return df.filter(F.col("end_time").isin(list(newest_times)))
 

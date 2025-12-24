@@ -1,3 +1,4 @@
+# Local training (spark-submit)
 docker build -t mlspark:latest -f mlspark/docker/Dockerfile .
 
 docker run --rm -it `
@@ -22,5 +23,76 @@ docker run --rm -it `
   --packages com.google.cloud.spark:spark-bigquery-with-dependencies_2.12:0.36.1 `
   /opt/mlspark/mlspark/training_job.py `
   --table decoded-tribute-474915-u9.crypto_data.binance_klines `
-  --max_days 30 `
-  --symbols BTCUSDT
+  --max_days 15 `
+  --symbols BTCUSDT `
+  --epsilon 0.0002 `
+  --label_mode binary_drop_flat `
+  --gap_minutes 5 `
+  --walk_folds 3
+
+# Streaming stack on Minikube
+minikube start --driver=docker --cpus=4 --memory=6144
+
+# 2. Set Docker environment (important)
+minikube docker-env | Invoke-Expression
+echo $env:DOCKER_HOST  # should show tcp://127.0.0.1:xxxxx
+
+# 3. Build Maven
+cd StreamingLayer-Spark-Kafka
+mvn clean package -DskipTests
+
+# 4. Build images (after minikube docker-env)
+docker build -t crypto-spark-streaming:latest -f docker/spark-streaming/Dockerfile .
+docker build -t crypto-producer:latest -f docker/producer/Dockerfile .
+docker build -t crypto-api:latest -f docker/fastapi-server/Dockerfile .
+docker build -t mlspark:latest -f mlspark/docker/Dockerfile .
+
+# 5. Verify images
+docker images | Select-String crypto
+
+# 6. Create namespace & secrets
+kubectl create namespace crypto-streaming
+
+kubectl create secret generic crypto-secrets `
+   --from-file=GCS_KEY_JSON=C:\Users\Admin\Downloads\decoded-tribute-474915-u9-111f1343f6c0.json `
+   --from-literal=MONGO_URI="mongodb+srv://20224960:20224960@cluster0.egwmocl.mongodb.net/?appName=Cluster0" `
+   -n crypto-streaming
+
+kubectl create configmap crypto-config `
+   --from-literal=KAFKA_BOOTSTRAP_SERVERS="kafka-service:9092" `
+   --from-literal=KAFKA_TOPIC="binance" `
+   --from-literal=MONGO_DB="BigData" `
+   --from-literal=MONGO_TUMBLING_COLLECTION="agg_tumbling_1m" `
+   --from-literal=MONGO_SLIDING_COLLECTION="agg_sliding_30s" `
+   --from-literal=GCS_BUCKET="crypto-streaming-data" `
+   --from-literal=GCS_RAW_PATH="raw-trades" `
+   -n crypto-streaming
+
+# 7. Deploy base streaming stack
+kubectl apply -f k8s/kafka-pvc.yaml -n crypto-streaming
+kubectl apply -f k8s/grafana-storage.yaml -n crypto-streaming
+kubectl apply -f k8s/2-kafka-deployment.yaml -n crypto-streaming
+
+kubectl wait --for=condition=ready pod -l app=zookeeper -n crypto-streaming --timeout=120s
+kubectl wait --for=condition=ready pod -l app=kafka -n crypto-streaming --timeout=180s
+
+$kafkaPod = kubectl get pod -l app=kafka -n crypto-streaming -o jsonpath="{.items[0].metadata.name}"
+kubectl exec $kafkaPod -n crypto-streaming -- kafka-topics --create --topic binance --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --if-not-exists
+
+kubectl apply -f k8s/3-producer-deployment.yaml -n crypto-streaming
+kubectl apply -f k8s/4-spark-streaming-deployment.yaml -n crypto-streaming
+kubectl apply -f k8s/5-api-server-deployment.yaml -n crypto-streaming
+kubectl apply -f k8s/6-grafana-deployment.yaml -n crypto-streaming
+
+# 8. Wait & check
+Start-Sleep -Seconds 30
+kubectl get pods -n crypto-streaming
+
+# 9. ML Spark streaming (Kafka -> Mongo with latest model)
+# Secret already in step 6 (crypto-secrets) holds MONGO_URI + GCS_KEY_JSON; no extra secret in mlspark-config.yaml.
+kubectl apply -f k8s/mlspark-config.yaml -n crypto-streaming
+kubectl apply -f k8s/mlspark-streaming-deployment.yaml -n crypto-streaming
+kubectl wait --for=condition=available deployment/mlspark-streaming -n crypto-streaming --timeout=180s
+
+# 10. ML training cronjob (BQ -> GCS model refresh)
+kubectl apply -f k8s/mlspark-training-cronjob.yaml -n crypto-streaming
