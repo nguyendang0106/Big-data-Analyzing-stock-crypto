@@ -4,6 +4,7 @@ Reads 1m klines from BigQuery, builds features, trains a GBTClassifier to predic
 and writes model artifacts + metadata to GCS (add-on pipeline, no change to existing jobs).
 """
 import argparse
+import os
 import sys
 from datetime import date, datetime, timedelta
 
@@ -88,11 +89,22 @@ def main():
     cfg = load_training_config()
     table_fqn = args.table or f"{cfg.bq_project}.{cfg.bq_dataset}.{cfg.bq_table}"
 
-    spark = (
-        SparkSession.builder.appName("CryptoML-Training")
-        .config("spark.sql.session.timeZone", "UTC")
-        .getOrCreate()
-    )
+    gcs_key = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    gcs_connector = "/opt/spark/jars/gcs-connector-hadoop3-latest.jar"
+    builder = SparkSession.builder.appName("CryptoML-Training").config("spark.sql.session.timeZone", "UTC")
+    if gcs_key:
+        builder = (
+            builder.config("spark.hadoop.fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem")
+            .config("spark.hadoop.google.cloud.auth.service.account.enable", "true")
+            .config("spark.hadoop.google.cloud.auth.service.account.json.keyfile", gcs_key)
+        )
+    if os.path.exists(gcs_connector):
+        builder = (
+            builder.config("spark.jars", gcs_connector)
+            .config("spark.driver.extraClassPath", gcs_connector)
+            .config("spark.executor.extraClassPath", gcs_connector)
+        )
+    spark = builder.getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
 
     df_raw = load_klines(spark, table_fqn)
