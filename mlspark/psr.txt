@@ -11,7 +11,7 @@ docker run --rm -it `
   mlspark:latest `
   /opt/spark/bin/spark-submit `
   --master local[2] `
-  --driver-memory 4g --executor-memory 4g `
+  --driver-memory 3g --executor-memory 3g `
   --conf spark.executor.instances=1 `
   --conf spark.executor.cores=2 `
   --conf spark.executor.memoryOverhead=1024 `
@@ -20,15 +20,15 @@ docker run --rm -it `
   --conf spark.default.parallelism=20 `
   --conf spark.sql.files.maxPartitionBytes=32m `
   --conf spark.jars.ivy=/tmp/.ivy2 `
+  --packages com.google.cloud.spark:spark-bigquery-with-dependencies_2.12:0.36.1 `
   /opt/mlspark/mlspark/training_job.py `
   --table decoded-tribute-474915-u9.crypto_data.binance_klines `
-  --max_days 10 `
+  --max_days 15 `
   --symbols BTCUSDT `
   --epsilon 0.0002 `
   --label_mode binary_drop_flat `
   --gap_minutes 5 `
   --walk_folds 3
-
 
 # Streaming stack on Minikube
 minikube start --driver=docker --cpus=4 --memory=6144
