@@ -12,6 +12,8 @@ RUN pip install --no-cache-dir \
 
 # Copy code into /opt/mlspark/mlspark so imports mlspark.* work
 COPY mlspark /opt/mlspark/mlspark
+# Include GCS connector jar (already present in repo under spark/jars)
+COPY spark/jars/gcs-connector-hadoop3-latest.jar /opt/spark/jars/
 
 ENV PYTHONPATH="/opt/mlspark:/opt/spark/python:/opt/spark/python/lib/py4j-0.10.9.7-src.zip:${PYTHONPATH:-}"
 

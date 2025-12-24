@@ -206,17 +206,23 @@ def aggregate_bars(trades, slide: str = None):
 
 def main():
     cfg = load_streaming_config()
-    spark = (
-        SparkSession.builder.appName("CryptoML-Streaming")
-        .config("spark.sql.session.timeZone", "UTC")
-        .getOrCreate()
-    )
-    spark.sparkContext.setLogLevel("WARN")
-
-    if cfg.gcs_key_path:
-        spark.sparkContext._jsc.hadoopConfiguration().set(
-            "google.cloud.auth.service.account.json.keyfile", cfg.gcs_key_path
+    gcs_key = cfg.gcs_key_path or os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    gcs_connector = "/opt/spark/jars/gcs-connector-hadoop3-latest.jar"
+    builder = SparkSession.builder.appName("CryptoML-Streaming").config("spark.sql.session.timeZone", "UTC")
+    if gcs_key:
+        builder = (
+            builder.config("spark.hadoop.fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem")
+            .config("spark.hadoop.google.cloud.auth.service.account.enable", "true")
+            .config("spark.hadoop.google.cloud.auth.service.account.json.keyfile", gcs_key)
         )
+    if os.path.exists(gcs_connector):
+        builder = (
+            builder.config("spark.jars", gcs_connector)
+            .config("spark.driver.extraClassPath", gcs_connector)
+            .config("spark.executor.extraClassPath", gcs_connector)
+        )
+    spark = builder.getOrCreate()
+    spark.sparkContext.setLogLevel("WARN")
 
     trades = build_trades_df(spark, cfg)
     tumbling = aggregate_bars(trades)
