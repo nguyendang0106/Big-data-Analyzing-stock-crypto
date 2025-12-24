@@ -25,6 +25,9 @@ from mlspark.feature_engineering import (
 from mlspark.model_io import save_metadata
 
 
+HORIZON_MINUTES = 5
+
+
 def normalize_ts(df):
     """Handle ms/ns/seconds open_time."""
     df = df.withColumn(
@@ -41,29 +44,32 @@ def load_klines(spark: SparkSession, table_fqn: str):
         spark.read.format("bigquery")
         .option("table", table_fqn)
         .load()
-        .select("symbol", "open_time", "close", "volume", "number_of_trades")
+        .select("symbol", "open_time", "open", "high", "low", "close", "volume", "number_of_trades")
     )
     df = normalize_ts(df)
     df = df.withColumnRenamed("number_of_trades", "trade_count")
     return df
 
 
-def build_dataset(df_raw):
+def build_dataset(df_raw, label_epsilon: float, max_gap_minutes: int):
     df = add_time_order(df_raw, "event_time")
+    df = df.filter(F.col("event_time").isNotNull())
     df = add_bar_features(df)
-    df = add_labels(df, horizon=5)
+    df = add_labels(df, horizon=HORIZON_MINUTES, epsilon=label_epsilon)
     feats = feature_columns()
-    df = forward_fill(df, feats)
+    df = forward_fill(df, feats, max_gap_minutes=max_gap_minutes)
     df = df.dropna(subset=list(feats) + ["label", "close", "volume", "trade_count"])
     return df
 
 
-def split_time(df, validation_days: int):
-    max_ts = df.agg(F.max("event_time")).collect()[0][0]
-    if max_ts is None:
-        raise ValueError("No data available.")
-    cut = max_ts - timedelta(days=validation_days)
-    return df.filter(F.col("event_time") < cut), df.filter(F.col("event_time") >= cut), cut
+def split_time_per_symbol(df, validation_days: int):
+    """Time split per symbol to avoid distribution shift."""
+    max_by_symbol = df.groupBy("symbol").agg(F.max("event_time").alias("max_event_time"))
+    cut_df = max_by_symbol.withColumn("cut_time", F.col("max_event_time") - F.expr(f"INTERVAL {validation_days} DAYS"))
+    df_with_cut = df.join(cut_df.select("symbol", "cut_time"), on="symbol", how="inner")
+    train_df = df_with_cut.filter(F.col("event_time") < F.col("cut_time")).drop("cut_time")
+    val_df = df_with_cut.filter(F.col("event_time") >= F.col("cut_time")).drop("cut_time")
+    return train_df, val_df, cut_df
 
 
 def train(df_train, df_val, feature_version: str, seed: int):
@@ -116,8 +122,8 @@ def main():
         if mx:
             df_raw = df_raw.filter(F.col("event_time") >= F.lit(mx - timedelta(days=args.max_days)))
 
-    df_dataset = build_dataset(df_raw)
-    train_df, val_df, cut = split_time(df_dataset, cfg.validation_days)
+    df_dataset = build_dataset(df_raw, label_epsilon=cfg.label_epsilon, max_gap_minutes=cfg.ffill_max_gap_minutes)
+    train_df, val_df, cut_df = split_time_per_symbol(df_dataset, cfg.validation_days)
     if train_df.count() == 0 or val_df.count() == 0:
         raise ValueError("Not enough data after filtering.")
 
@@ -135,10 +141,13 @@ def main():
         "train_range_end": train_df.agg(F.max("event_time")).collect()[0][0].isoformat(),
         "validation_range_start": val_df.agg(F.min("event_time")).collect()[0][0].isoformat(),
         "validation_range_end": val_df.agg(F.max("event_time")).collect()[0][0].isoformat(),
-        "split_point": cut.isoformat(),
+        "split_strategy": "per_symbol_time",
+        "split_points": {r["symbol"]: r["cut_time"].isoformat() for r in cut_df.collect() if r["cut_time"]},
         "metrics": metrics,
         "created_at": datetime.utcnow().isoformat(),
-        "horizon_sec": 300,
+        "horizon_sec": HORIZON_MINUTES * 60,
+        "label_epsilon": cfg.label_epsilon,
+        "ffill_max_gap_minutes": cfg.ffill_max_gap_minutes,
     }
     save_metadata(cfg.gcs_bucket, cfg.model_base_path, cfg.model_name, today, metadata)
     print(f"Saved model to {model_path}")

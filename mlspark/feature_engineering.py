@@ -24,6 +24,8 @@ def add_bar_features(df: DataFrame) -> DataFrame:
     df = df.withColumn("rolling_mean_15", F.avg("close").over(w15))
     df = df.withColumn("rolling_vol_15", F.stddev_pop("close").over(w15))
     df = df.withColumn("macd_like", F.avg("close").over(w5) - F.avg("close").over(w30))
+    df = df.withColumn("hl_range", (F.col("high") - F.col("low")) / F.col("close"))
+    df = df.withColumn("oc_return", F.when(F.col("open") > 0, F.log(F.col("close") / F.col("open"))))
 
     change = F.col("close") - F.col("prev_close")
     gain = F.when(change > 0, change).otherwise(0.0)
@@ -44,42 +46,71 @@ def add_bar_features(df: DataFrame) -> DataFrame:
         "anomaly_score",
         F.when(F.col("return_std_30") > 0, (F.col("return_1m") - F.col("return_mean_30")) / F.col("return_std_30")),
     )
+    df = df.withColumn("volume_mean_30", F.avg("volume").over(w30))
+    df = df.withColumn("volume_std_30", F.stddev_pop("volume").over(w30))
+    df = df.withColumn(
+        "volume_z",
+        F.when(F.col("volume_std_30") > 0, (F.col("volume") - F.col("volume_mean_30")) / F.col("volume_std_30")),
+    )
+    df = df.withColumn("trade_mean_30", F.avg("trade_count").over(w30))
+    df = df.withColumn("trade_std_30", F.stddev_pop("trade_count").over(w30))
+    df = df.withColumn(
+        "trade_count_z",
+        F.when(F.col("trade_std_30") > 0, (F.col("trade_count") - F.col("trade_mean_30")) / F.col("trade_std_30")),
+    )
+    df = df.withColumn("return_volume_corr_30", F.corr("return_1m", "volume").over(w30))
     return df
 
 
-def add_labels(df: DataFrame, horizon: int = 5) -> DataFrame:
-    """Label: next_horizon return sign."""
+def add_labels(df: DataFrame, horizon: int = 5, epsilon: float = 0.0003) -> DataFrame:
+    """Label: sign of horizon-minute return, with gap check + noise filter."""
     w = Window.partitionBy("symbol").orderBy("event_time")
     df = df.withColumn("future_close", F.lead("close", horizon).over(w))
-    df = df.withColumn("next_return", (F.col("future_close") - F.col("close")) / F.col("close"))
+    df = df.withColumn("future_event_time", F.lead("event_time", horizon).over(w))
+    df = df.withColumn("future_gap_sec", F.col("future_event_time").cast("long") - F.col("event_time").cast("long"))
+    df = df.withColumn(
+        "next_return",
+        F.when(F.col("future_gap_sec") == horizon * 60, (F.col("future_close") - F.col("close")) / F.col("close")),
+    )
+    df = df.withColumn("label_raw", F.when(F.abs(F.col("next_return")) >= F.lit(epsilon), F.col("next_return")))
     df = df.withColumn(
         "label",
-        F.when(F.col("next_return") > 0, F.lit(1.0))
-        .when(F.col("next_return") < 0, F.lit(0.0))
-        .otherwise(F.lit(0.0)),
+        F.when(F.col("label_raw") > 0, F.lit(1.0)).when(F.col("label_raw") < 0, F.lit(0.0)),
     )
     return df
 
 
-def forward_fill(df: DataFrame, cols: Tuple[str, ...]) -> DataFrame:
-    """Forward-fill selected columns within symbol."""
-    w = Window.partitionBy("symbol").orderBy("event_time").rowsBetween(Window.unboundedPreceding, 0)
+def forward_fill(df: DataFrame, cols: Tuple[str, ...], max_gap_minutes: int = 5) -> DataFrame:
+    """Forward-fill selected columns within symbol without jumping big gaps."""
+    base = Window.partitionBy("symbol").orderBy("event_time")
+    df = df.withColumn("prev_event_time", F.lag("event_time").over(base))
+    df = df.withColumn("gap_sec", F.col("event_time").cast("long") - F.col("prev_event_time").cast("long"))
+    df = df.withColumn(
+        "gap_group",
+        F.sum(F.when((F.col("gap_sec").isNull()) | (F.col("gap_sec") > max_gap_minutes * 60), 1).otherwise(0)).over(base),
+    )
+    w = Window.partitionBy("symbol", "gap_group").orderBy("event_time").rowsBetween(Window.unboundedPreceding, 0)
     out = df
     for c in cols:
         out = out.withColumn(c, F.last(F.col(c), ignorenulls=True).over(w))
-    return out
+    return out.drop("prev_event_time", "gap_sec", "gap_group")
 
 
 def feature_columns() -> Tuple[str, ...]:
     return (
         "return_1m",
         "log_return_1m",
+        "oc_return",
         "rolling_mean_5",
         "rolling_mean_15",
         "rolling_vol_15",
         "macd_like",
+        "hl_range",
         "rsi_14",
         "vol_sma_15",
         "trades_sma_15",
         "anomaly_score",
+        "volume_z",
+        "trade_count_z",
+        "return_volume_corr_30",
     )

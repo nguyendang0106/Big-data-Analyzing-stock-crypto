@@ -14,6 +14,8 @@ class TrainingConfig:
     feature_version: str = "v1"
     validation_days: int = 7
     seed: int = 1234
+    label_epsilon: float = 0.0003
+    ffill_max_gap_minutes: int = 5
 
 
 @dataclass
@@ -50,6 +52,8 @@ def load_training_config() -> TrainingConfig:
         feature_version=os.getenv("FEATURE_VERSION", "v1"),
         validation_days=int(os.getenv("VALIDATION_DAYS", "7")),
         seed=int(os.getenv("SEED", "1234")),
+        label_epsilon=float(os.getenv("LABEL_EPSILON", "0.0003")),
+        ffill_max_gap_minutes=int(os.getenv("FFILL_MAX_GAP_MINUTES", "5")),
     )
 
 
